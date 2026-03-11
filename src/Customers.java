@@ -1,4 +1,7 @@
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 class Customer {
 
@@ -114,12 +117,8 @@ class Customer {
             return bill;
         }
 
-//        static public Double billCheck(String compareaddress,String cost){
-//            if(compareaddress.equals(address)){
-//                Double.parseDouble(cost);
-//            }
-//            return null;
-//        }
+
+
 
     }
 
