@@ -3,23 +3,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-class Customer {
 
-    static public class Customers {
-        static String id;
-        static String firstname;
-        static String lastname;
-        static String company;
-        static String address;
-        static String city;
-        static String state;
-        static String postalcode;
-        static String phone;
-        static String fax;
-        static String email;
-        static String supportrepid;
-        static String country;
-        static Double bill;
+    public class Customers {
+         String id;
+         String firstname;
+         String lastname;
+         String company;
+         String address;
+         String city;
+         String state;
+         String postalcode;
+         String phone;
+         String fax;
+         String email;
+         String supportrepid;
+         String country;
+         Double bill;
 
 
         Customers(String id,
@@ -57,61 +56,70 @@ class Customer {
 
 
 
+         public String getInfoShort(){
+            return "\n\nID: " + id +
+                   "\nFirst Name: " + firstname +
+                   "\nLast Name: " + lastname +
+                    "\nAddress: " + address +
+                   "\nCity: " + city +
+                   "\nCountry: " + country;
 
 
+        }
 
-        static public String getId(){
+
+        public String getId(){
             return id;
         }
-        static public String getFirstName() {
+        public String getFirstName() {
             return firstname;
         }
 
-        static public String getLastName() {
+        public String getLastName() {
             return lastname;
         }
 
-        static public String getCompany() {
+        public String getCompany() {
             return company;
         }
 
-        static public String getAddress() {
+        public String getAddress() {
             return address;
         }
 
-        static public String getCity() {
+        public String getCity() {
             return city;
         }
 
-        static public String getState() {
+        public String getState() {
             return lastname;
         }
 
-        static public String getCountry() {
+        public String getCountry() {
             return country;
         }
 
-        static public String getPostalcode() {
+        public String getPostalcode() {
             return postalcode;
         }
 
-        static public String getPhone() {
+        public String getPhone() {
             return phone;
         }
 
-        static public String getFax() {
+        public String getFax() {
             return fax;
         }
 
-        static public String getEmail() {
+        public String getEmail() {
             return email;
         }
 
-        static public String getSupportrepid() {
+        public String getSupportrepid() {
             return supportrepid;
         }
 
-        static public Double getBill() {
+        public Double getBill() {
             return bill;
         }
 
@@ -120,7 +128,7 @@ class Customer {
 
     }
 
-}
+
 
 
 

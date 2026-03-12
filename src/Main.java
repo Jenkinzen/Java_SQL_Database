@@ -63,17 +63,18 @@ public class Main
         {
 
             String country = customerinfos.getString("Country");
-
-            if(!customers_sorted_by_country.containsKey(country)){
-                customers_sorted_by_country.put(country,new ArrayList<>());
-            }
+            String customerid = customerinfos.getString("CustomerId");
 
 
 
 
 
 
-            Customer.Customers c = new Customer.Customers(
+
+
+
+
+            Customers c = new Customers(
                     customerinfos.getString("CustomerId"),customerinfos.getString("FirstName"),
                     customerinfos.getString("LastName"),customerinfos.getString("Company"),customerinfos.getString("Address"),
                     customerinfos.getString("City"),customerinfos.getString("State"),
@@ -84,8 +85,11 @@ public class Main
                     customer_bill_by_id.get(customerinfos.getString("CustomerId")));
 
 
-
                 Double getbillrounded = Math.round(100.0*c.getBill()) / 100.0;
+
+            if(!customers_sorted_by_country.containsKey(country)){
+                customers_sorted_by_country.put(country,new ArrayList<>());
+            }
 
             customers_sorted_by_country.get(customerinfos.getString("Country")).add(
                             "\n\nCustomer ID: " + c.getId()+ " " +
@@ -95,6 +99,22 @@ public class Main
                             "\nCity: " + c.getCity()+ " "+
                             "\nCountry: " + c.getCountry()+ " " +
                             "\nBill: " + getbillrounded + " $");
+
+
+            if(!customer_sorted_by_country_as_customerobject.containsKey(country)){
+                customer_sorted_by_country_as_customerobject.put(country,new ArrayList<>());
+            }
+            if(customer_sorted_by_country_as_customerobject.containsKey(country)){
+                customer_sorted_by_country_as_customerobject.get(country).add(c);
+            }
+
+
+
+            if(!customer_sorted_by_id.containsKey(country)){
+                customer_sorted_by_id.put(country, c);
+            }
+            customer_sorted_by_id.get(customerid);
+
         }
 
 
@@ -103,14 +123,32 @@ public class Main
         System.out.println(customer_bill_by_id.get("38"));
 
 
+        ArrayList<Customers> xyz = customer_sorted_by_country_as_customerobject.get("Germany");
+        System.out.println(xyz.get(1).getFirstName() + "\n");
+
+
+        //so kann man mehrere Attribute holen
+        Customers x = customer_sorted_by_country_as_customerobject.get("Germany").get(0);
+        System.out.println(x.getFirstName());
+        System.out.println(x.getLastName());
+        System.out.println(x.getAddress());
+        System.out.println(x.getState());
+        System.out.println(x.getCountry());
+
+
+
 
     }
 
 
+    static HashMap<String, Customers> customer_sorted_by_id = new HashMap<>();
     static HashMap<String, Double> customer_bill_by_id = new HashMap<>();
+
+    //funktioniert, ist aber Scheiße weil man keine einzelnen Attribute aufrufen kann da alle Attribute in ,und als, String gespeichert werden.
     static HashMap<String, ArrayList<String>> customers_sorted_by_country = new HashMap<>();
 
-
+    //eher so mit kompletten Objekten als Value
+    static HashMap<String, ArrayList<Customers>> customer_sorted_by_country_as_customerobject = new HashMap<>();
 
 
 
