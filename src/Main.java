@@ -35,6 +35,7 @@ public class Main
         {
             String customerid = paymentinfos.getString("CustomerId");
             Double bill = paymentinfos.getDouble("Total");
+            
 
 
 
@@ -43,9 +44,10 @@ public class Main
             {
                 customer_bill_by_id.put(customerid, bill);
             } else {
-                // wenn es die customerid schon gibt > nächsten betrag zur Rechnung adden.
+                // wenn es die customerid schon gibt > nächsten betrag zum Zahlungsbetrag addieren.
                  double currentbill = customer_bill_by_id.get(customerid);
-                 customer_bill_by_id.put(customerid, currentbill + bill);
+                double summedbillrounded = Math.round(100.0 * (currentbill + bill)) / 100.0;
+                 customer_bill_by_id.put(customerid, summedbillrounded);
             }
 
 
@@ -83,21 +85,22 @@ public class Main
 
 
 
-
+                Double getbillrounded = Math.round(100.0*c.getBill()) / 100.0;
 
             customers_sorted_by_country.get(customerinfos.getString("Country")).add(
-                            "\n\nFirst name: " +c.getFirstName()+ " " +
+                            "\n\nCustomer ID: " + c.getId()+ " " +
+                            "\nFirst name: " +c.getFirstName()+ " " +
                             "\nLast name: "+c.getLastName()+ " " +
                             "\nAddress: " + c.getAddress()+ " " +
                             "\nCity: " + c.getCity()+ " "+
                             "\nCountry: " + c.getCountry()+ " " +
-                            "\nBill: " + c.getBill()+ " $");
+                            "\nBill: " + getbillrounded + " $");
         }
 
 
 
         System.out.println(customers_sorted_by_country.get("Germany"));
-        System.out.println(customer_bill_by_id.get("1"));
+        System.out.println(customer_bill_by_id.get("38"));
 
 
 

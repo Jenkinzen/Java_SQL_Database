@@ -60,15 +60,13 @@ class Customer {
 
 
 
-
-
+        static public String getId(){
+            return id;
+        }
         static public String getFirstName() {
             return firstname;
         }
 
-        static public String getId(){
-            return id;
-        }
         static public String getLastName() {
             return lastname;
         }
