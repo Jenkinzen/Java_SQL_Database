@@ -10,25 +10,14 @@ public class Main
 {
 
 
-    public static void connect() throws SQLException
-    {
-        //connection string
-        var url = "jdbc:sqlite:C:\\Users\\ggord\\IdeaProjects\\neues_projekt\\chinook.db";
-
-        try (var conn = DriverManager.getConnection(url)){
-            System.out.println("Connection to SQLite has been established.");
-        } catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
-
     public static void main(String[] args) throws SQLException
-    {
-        connect();
+    {   Connection.connection();
 
-
+        ///CONNECTION/////////////////////////////////////////////////////////////////////////
         var stmt = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\ggord\\IdeaProjects\\neues_projekt\\chinook.db").createStatement();
 
+
+        ///SQL DATASOURCE////////////////////////////////////////////////////////////////////
         var paymentinfos = stmt.executeQuery("SELECT BillingAddress,CustomerId,Total FROM invoices");
 
         while (paymentinfos.next())
@@ -40,15 +29,9 @@ public class Main
 
 
             //Erstellen einer HashMap und Rechnung einfügen insofern es für die customerid noch keine gibt
-            if(!customer_bill_by_id.containsKey(customerid))
-            {
-                customer_bill_by_id.put(customerid, bill);
-            } else {
-                // wenn es die customerid schon gibt > nächsten betrag zum Zahlungsbetrag addieren.
-                 double currentbill = customer_bill_by_id.get(customerid);
-                double summedbillrounded = Math.round(100.0 * (currentbill + bill)) / 100.0;
-                 customer_bill_by_id.put(customerid, summedbillrounded);
-            }
+
+            Service.getandroundfinalsum(customer_bill_by_id,customerid,bill);
+
 
 
         }
@@ -79,20 +62,14 @@ public class Main
                 Double getbillrounded = Math.round(100.0*c.getBill()) / 100.0;
 
 
-
-
-            if(!customer_sorted_by_country_as_customerobject.containsKey(country)){
-                customer_sorted_by_country_as_customerobject.put(country,new ArrayList<>());
-            }
-            if(customer_sorted_by_country_as_customerobject.containsKey(country)){
-                customer_sorted_by_country_as_customerobject.get(country).add(c);
-            }
+            Service.createkeyandfillvalues(country,customer_sorted_by_country_as_customerobject,c);
 
 
 
-            if(!customer_sorted_by_id.containsKey(customerid)){
-                customer_sorted_by_id.put(customerid, c);
-            }
+
+
+
+
 
 
         }
@@ -100,31 +77,34 @@ public class Main
 
 
 
-        System.out.println(customer_bill_by_id.get("38"));
-
-        //so kann man ein Attribut holen
-        ArrayList<Customers> xyz = customer_sorted_by_country_as_customerobject.get("Germany");
-        System.out.println(xyz.get(1).getFirstName() + "\n");
-
+        System.out.println(customer_bill_by_id.get("38")+"%");
 
         //so kann man mehrere Attribute holen
+        ArrayList<Customers> xyz = customer_sorted_by_country_as_customerobject.get("Germany");
+        System.out.println("\n" + xyz.get(1).getFirstName());
+        System.out.println(xyz.get(1).getLastName());
+        System.out.println(xyz.get(1).getAddress());
+        System.out.println(xyz.get(1).getCity()+"\n");
+        System.out.println(xyz.get(1).getBill()+"$");
+
+
+        //so kann man auch mehrere Attribute holen
         Customers x = customer_sorted_by_country_as_customerobject.get("Germany").get(2);
-        System.out.println(x.getFirstName());
+        System.out.println("\n" + x.getFirstName());
         System.out.println(x.getLastName());
         System.out.println(x.getAddress());
         System.out.println(x.getState());
-        System.out.println(x.getCountry());
+        System.out.println(x.getCountry() + "\n");
+        System.out.println(x.getBill()+"$");
 
 
-        Customers y = customer_sorted_by_id.get("1");
-        System.out.println(y.getId());
-        System.out.println(y.getFirstName());
+
 
 
     }
 
 
-    static HashMap<String, Customers> customer_sorted_by_id = new HashMap<>();
+
 
     static HashMap<String, Double> customer_bill_by_id = new HashMap<>();
 
