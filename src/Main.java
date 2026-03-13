@@ -24,7 +24,7 @@ public class Main
         {
             String customerid = paymentinfos.getString("CustomerId");
             Double bill = paymentinfos.getDouble("Total");
-            
+
 
 
 
@@ -44,8 +44,10 @@ public class Main
 
         while (customerinfos.next())
         {
-
+            String firstname = customerinfos.getString("FirstName");
+            String lastname = customerinfos.getString("LastName");
             String country = customerinfos.getString("Country");
+
             String customerid = customerinfos.getString("CustomerId");
 
             Customers c = new Customers(
@@ -61,8 +63,9 @@ public class Main
 
                 Double getbillrounded = Math.round(100.0*c.getBill()) / 100.0;
 
+                Service.sortingbyletters(customerinfos.getString("LastName"),customers_sorted_by_lastname,c);
 
-            Service.createkeyandfillvalues(country,customer_sorted_by_country_as_customerobject,c);
+            Service.createkeyandfillvalues(country,customer_sorted_by_country,c);
 
 
 
@@ -75,32 +78,29 @@ public class Main
         }
 
 
-
-
         System.out.println(customer_bill_by_id.get("38")+"%");
 
         //so kann man mehrere Attribute holen
-        ArrayList<Customers> xyz = customer_sorted_by_country_as_customerobject.get("Germany");
-        System.out.println("\n" + xyz.get(1).getFirstName());
-        System.out.println(xyz.get(1).getLastName());
-        System.out.println(xyz.get(1).getAddress());
-        System.out.println(xyz.get(1).getCity()+"\n");
-        System.out.println(xyz.get(1).getBill()+"$");
+        ArrayList<Customers> xyz = customer_sorted_by_country.get("Germany");
+        System.out.println("\n" + xyz.get(1).getInfoShort());
 
 
         //so kann man auch mehrere Attribute holen
-        Customers x = customer_sorted_by_country_as_customerobject.get("Germany").get(2);
-        System.out.println("\n" + x.getFirstName());
-        System.out.println(x.getLastName());
-        System.out.println(x.getAddress());
-        System.out.println(x.getState());
-        System.out.println(x.getCountry() + "\n");
-        System.out.println(x.getBill()+"$");
+        Customers x = customer_sorted_by_country.get("Germany").get(2);
+        System.out.println("\n" + x.getInfoShort());
 
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
+        Service.customersbycountry(customer_sorted_by_country,"France");
 
+        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
-
+        System.out.println(customers_sorted_by_lastname.keySet());
+        for(int i = 0; i < customers_sorted_by_lastname.get("B").toArray().length;i++) {
+            ArrayList<Customers> blllla = customers_sorted_by_lastname.get("B");
+            blllla.get(i);
+            System.out.println(blllla.get(i).getLastName());
+        }
     }
 
 
@@ -114,7 +114,8 @@ public class Main
 
 
     //eher so mit kompletten Objekten als Value(bzw ArrayListen mit Objekten drin)
-    static HashMap<String, ArrayList<Customers>> customer_sorted_by_country_as_customerobject = new HashMap<>();
+    static HashMap<String, ArrayList<Customers>> customer_sorted_by_country = new HashMap<>();
+    static HashMap<String, ArrayList<Customers>> customers_sorted_by_lastname = new HashMap<>();
 
 
 

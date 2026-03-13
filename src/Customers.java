@@ -62,7 +62,8 @@ import java.util.Objects;
                    "\nLast Name: " + lastname +
                     "\nAddress: " + address +
                    "\nCity: " + city +
-                   "\nCountry: " + country;
+                   "\nCountry: " + country+
+                    "\nBill: " + bill;
 
 
         }
