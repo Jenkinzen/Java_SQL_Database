@@ -8,29 +8,29 @@ import java.util.Objects;
          String id;
          String firstname;
          String lastname;
-         String company;
          String address;
-         String city;
-         String state;
-         String postalcode;
-         String phone;
-         String fax;
-         String email;
-         String supportrepid;
-         String country;
+        String city;
+        String country;
+        String company;
+        String state;
+        String phone;
+        String postalcode;
+        String fax;
+        String email;
+        String supportrepid;
          Double bill;
 
 
         Customers(String id,
                   String firstname,
                   String lastname,
-                  String company,
                   String address,
                   String city,
-                  String state,
                   String country,
-                  String postalcode,
+                  String company,
+                  String state,
                   String phone,
+                  String postalcode,
                   String fax,
                   String email,
                   String supportrepid,
@@ -39,13 +39,13 @@ import java.util.Objects;
             this.id = id;
             this.firstname = firstname;
             this.lastname = lastname;
-            this.company = company;
             this.address = address;
             this.city = city;
-            this.state = state;
             this.country = country;
-            this.postalcode = postalcode;
+            this.company = company;
+            this.state = state;
             this.phone = phone;
+            this.postalcode = postalcode;
             this.fax = fax;
             this.email = email;
             this.supportrepid = supportrepid;
@@ -120,8 +120,10 @@ import java.util.Objects;
             return supportrepid;
         }
 
-        public Double getBill() {
-            return bill;
+        public double getBill() {
+
+            return Math.round(bill*100) / 100;
+
         }
 
 
