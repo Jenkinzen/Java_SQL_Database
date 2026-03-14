@@ -51,4 +51,15 @@ public class Service {
         }
         return outputlist;
     }
+
+    public static ArrayList<Customers> sortedbylastnameletter(String lastnameletter,HashMap<String, ArrayList<Customers>> list)
+    {
+    System.out.println(list.keySet());
+        for(int i = 0; i < list.get(lastnameletter).toArray().length;i++) {
+            ArrayList<Customers> listbyletters = list.get(lastnameletter);
+            listbyletters.get(i);
+            System.out.println(listbyletters.get(i).getInfoShort());
+        }
+        return null;
+    }
 }

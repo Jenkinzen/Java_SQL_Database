@@ -13,11 +13,11 @@ public class Main
     public static void main(String[] args) throws SQLException
     {   Connection.connection();
 
-        ///CONNECTION/////////////////////////////////////////////////////////////////////////
+        ///CONNECTION/////////////////////////////////////////////////////////////////////////////////////
         var stmt = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\ggord\\IdeaProjects\\neues_projekt\\chinook.db").createStatement();
 
 
-        ///SQL DATASOURCE////////////////////////////////////////////////////////////////////
+        ///SQL DATASOURCE|PAYMENTINFOS////////////////////////////////////////////////////////////////////
         var paymentinfos = stmt.executeQuery("SELECT BillingAddress,CustomerId,Total FROM invoices");
 
         while (paymentinfos.next())
@@ -37,70 +37,68 @@ public class Main
         }
 
 
-
+        /// SQL DATASOURCE|CUSTOMERINFOS///////////////////////////////////////////////////////////////////
         var customerinfos = stmt.executeQuery("SELECT * FROM customers");
 
 
 
         while (customerinfos.next())
         {
-            String firstname = customerinfos.getString("FirstName");
-            String lastname = customerinfos.getString("LastName");
-            String country = customerinfos.getString("Country");
 
             String customerid = customerinfos.getString("CustomerId");
-
-            Customers c = new Customers(
-                    customerinfos.getString("CustomerId"),customerinfos.getString("FirstName"),
-                    customerinfos.getString("LastName"),customerinfos.getString("Company"),customerinfos.getString("Address"),
-                    customerinfos.getString("City"),customerinfos.getString("State"),
-                    country,customerinfos.getString("PostalCode"),
-                    customerinfos.getString("Phone"),customerinfos.getString("Fax"),
-                    customerinfos.getString("Email"),customerinfos.getString("SupportRepId"),
-                    //clabel customerid weil .get die Value zum angegebenen Key sucht
-                    customer_bill_by_id.get(customerinfos.getString("CustomerId")));
-
-
-                Double getbillrounded = Math.round(100.0*c.getBill()) / 100.0;
-
-                Service.sortingbyletters(customerinfos.getString("LastName"),customers_sorted_by_lastname,c);
-
-            Service.createkeyandfillvalues(country,customer_sorted_by_country,c);
+            String firstname = customerinfos.getString("FirstName");
+            String lastname = customerinfos.getString("LastName");
+            String address = customerinfos.getString("Address");
+            String city = customerinfos.getString("City");
+            String country = customerinfos.getString("Country");
+            String state = customerinfos.getString("State");
+            String company = customerinfos.getString("Company");
+            String postalcode = customerinfos.getString("PostalCode");
+            String phone = customerinfos.getString("Phone");
+            String fax = customerinfos.getString("Fax");
+            String email = customerinfos.getString("Email");
+            String supportrepid = customerinfos.getString("SupportRepId");
+            //clabel customerid weil .get die Value zum angegebenen Key sucht
+            Double bill = customer_bill_by_id.get(customerinfos.getString("CustomerId"));
 
 
 
+            Customers c = new Customers(customerid,firstname,lastname,address,city,country,state,company,postalcode,phone,fax,email,supportrepid,bill);
 
+                    //Customer(Value) werden nach Anfangsbuchstabe des Nachnamens(Key) in customer_sorted_by_lastname gepackt
+                    Service.sortingbyletters(lastname,customers_sorted_by_lastname,c);
 
-
-
-
+                    //Customer(Value) werden in Länder(Key) unterteilt
+                    Service.createkeyandfillvalues(country,customer_sorted_by_country,c);
 
         }
 
 
-        System.out.println(customer_bill_by_id.get("38")+"%");
+        // Übergeordnete HashMap anlegen -> HashMap<(Kategorien nach denen sortiert werden soll als string), HashMap<Unterkategorie, ArrayList<Customers> (bspw customer sorted by country oder by last name.)
 
-        //so kann man mehrere Attribute holen
-        ArrayList<Customers> xyz = customer_sorted_by_country.get("Germany");
-        System.out.println("\n" + xyz.get(1).getInfoShort());
+        System.out.println(customer_bill_by_id.get("38")+"$");
 
 
-        //so kann man auch mehrere Attribute holen
-        Customers x = customer_sorted_by_country.get("Germany").get(2);
-        System.out.println("\n" + x.getInfoShort());
+        ArrayList<Customers> xyz = customer_sorted_by_country.get("Germany"); //wählt erst Key ("Germany")
+        System.out.println("\n" + xyz.get(2).getInfoShort()); //Dann Value (1) plus Getter(funktion)
 
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
+        Customers x = customer_sorted_by_country.get("Germany").get(2);//Wählt erst Key UND Value.
+        System.out.println("\n" + x.getInfoShort()); // danach nur noch Getter(funktion).
+
+        System.out.println(customer_sorted_by_country.get("Germany").get(2).getInfoShort()); //ohne Variable in einer Line
+
+        //Alle Customer eines Landes
         Service.customersbycountry(customer_sorted_by_country,"France");
 
-        System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
-        System.out.println(customers_sorted_by_lastname.keySet());
-        for(int i = 0; i < customers_sorted_by_lastname.get("B").toArray().length;i++) {
-            ArrayList<Customers> blllla = customers_sorted_by_lastname.get("B");
-            blllla.get(i);
-            System.out.println(blllla.get(i).getLastName());
-        }
+        //Alle Customer sortiert nach Anfangsbuchstaben der Nachnamen
+        Service.sortedbylastnameletter("H",customers_sorted_by_lastname);
+
+
+
+
+
     }
 
 
