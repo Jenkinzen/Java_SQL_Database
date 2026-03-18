@@ -120,6 +120,7 @@ public class Main {
                     if(Objects.equals(customeridinput, "all")){
                         System.out.println(Service.valuesearchbycontainingsubstring(customersortedbycategories.get("customerid"),""));
                     }
+                    //Numerische Oder irgendwelche reihenfolgen werden nicht von HashMaps, nur von linkedHashMaps generiert, muss ich mich morgen mal schlau machen.
                 }
                 if(columnsuche == 2){
                     System.out.println("Please insert what you want to search\ninsert \"all\" for every entry: ");
@@ -217,7 +218,7 @@ public class Main {
 
 
     //eher so mit kompletten Objekten als Value(bzw ArrayListen mit Objekten drin)
-    static HashMap<String, ArrayList<Customers>> customers_sorted_by_id = new HashMap<>();
+    static LinkedHashMap<String, ArrayList<Customers>> customers_sorted_by_id = new LinkedHashMap<>();
     static HashMap<String, ArrayList<Customers>> customers_sorted_by_country = new HashMap<>();
     static HashMap<String, ArrayList<Customers>> customers_sorted_by_firstname_letter = new HashMap<>();
     static HashMap<String, ArrayList<Customers>> customers_sorted_by_lastname_letter = new HashMap<>();
