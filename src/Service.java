@@ -20,18 +20,23 @@ public class Service {
 
         return hashmap;
     }
-
-    public static ArrayList<Customers> valuesearchbycontainingsubstring(HashMap<String, ArrayList<Customers>> customerlist,String containedsubstring) {
-        ArrayList<Customers> sortedbyinput = null;
-        for (String xxx : customerlist.keySet()) {
-            sortedbyinput = new ArrayList<>();
-            if (xxx.contains(containedsubstring)) {
-                sortedbyinput = customerlist.get(xxx);
-                for (int i = 0; i < sortedbyinput.size(); i++) {
-                    System.out.println(sortedbyinput.get(i).getInfoShort());
+    /// ////////// IRGENDWIE NULLPROOF MACHEN WEIL COMPANY > KEIN OUTPUT DA EIN KEY "null" IST UND XXX STRING SEIN MUSS
+    public static ArrayList<Customers> valuesearchbycontainingsubstring(HashMap<String, ArrayList<Customers>> customerlist,CharSequence containedsubstring) {
+            ArrayList<Customers> sortedbyinput = null;
+            for (String xxx : customerlist.keySet()) {
+                sortedbyinput = new ArrayList<>();
+                if (xxx.contains(null)) {
+                    continue;
                 }
+                if (xxx.contains(containedsubstring)) {
+                    sortedbyinput = customerlist.get(xxx);
+                    for (int i = 0; i < sortedbyinput.size(); i++) {
+                        System.out.println(sortedbyinput.get(i).getInfoShort());
+                    }
+                }
+
             }
-        }
+
         return sortedbyinput;
     }
 

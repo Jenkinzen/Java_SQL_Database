@@ -68,6 +68,23 @@ import java.util.Objects;
 
         }
 
+        public String getInfoAll(){
+            return "\n\nID: " + id +
+                    "\nFirst Name: " + firstname +
+                    "\nLast Name: " + lastname +
+                    "\nAddress: " + address +
+                    "\nCity: " + city +
+                    "\nState: " + state +
+                    "\nCountry: " + country +
+                    "\nPostal Code: " + postalcode +
+                    "\nPhone: " + phone +
+                    "\nFax: " + fax +
+                    "\nEmail: " + email +
+                    "\nSupport Rep ID: " + supportrepid +
+                    "\nBill: " + bill + "$";
+
+        }
+
 
         public String getId(){
             return id;
