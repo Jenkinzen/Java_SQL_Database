@@ -22,22 +22,7 @@ public class Service {
         return hashmap;
     }
 
-//    public static ArrayList<Customers> valuesearchbycontainingsubstring(HashMap<String, ArrayList<Customers>> customerlist,CharSequence containedsubstring) {
-//            ArrayList<Customers> sortedbyinput = null;
-//            for (String xxx : customerlist.keySet()) {
-//                String xxxx = String.valueOf(xxx);
-//                sortedbyinput = new ArrayList<>();
-//                if (xxxx.contains(containedsubstring)) {
-//                    sortedbyinput = customerlist.get(xxxx);
-//                    for (int i = 0; i < sortedbyinput.size(); i++) {
-//                        System.out.println(sortedbyinput.get(i).getInfoShort());
-//                    }
-//                }
-//
-//            }
-//
-//        return sortedbyinput;
-//    }
+
 
     public static ArrayList<Customers> valuesearchbycontainingsubstring(HashMap<String, ArrayList<Customers>> customerlist,CharSequence containedsubstring) {
         ArrayList<Customers>sortedbyinput = new ArrayList<>();
@@ -86,28 +71,12 @@ public class Service {
             String startingletter = (startingletterword.substring(0, 1));
             if (!outputlist.containsKey(startingletter)) {
                 outputlist.put(startingletter, new ArrayList<>());
+                outputlist.get(startingletter).add(customerinfo);
             } else {
                 outputlist.get(startingletter).add(customerinfo);
             }
             return outputlist;
     }
-
-
-
-
-
-    //gib mir die ganzen Infos der Values des eingegebenen Keys
-    public static ArrayList<Customers> outputofcustomerwithsamestartingletters(String lastnameletter,HashMap<String, ArrayList<Customers>> list)
-    {
-        for(int i = 0; i < list.get(lastnameletter).toArray().length;i++) {
-            ArrayList<Customers> listbyletters = list.get(lastnameletter);
-            listbyletters.get(i);
-            System.out.println(listbyletters.get(i).getInfoShort());
-        }
-        return null;
-    }
-
-
 
 }
 
