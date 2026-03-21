@@ -84,7 +84,7 @@ public class UI {
 
                             System.out.println("Please insert what you want to search for: ");
                             String customeridinput = scanner.next();
-                            chooseinfooutput(listshortcut("customerid",customeridinput,Service::outputofcustomerwithsamestartingletters));
+                            listshortcut("customerid",customeridinput,Service::outputofcustomerwithsamestartingletters);
                             break;
                         }
                         if (columnsuche == 2) {

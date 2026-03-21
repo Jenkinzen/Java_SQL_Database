@@ -63,7 +63,7 @@ import java.util.Objects;
                     "\nAddress: " + address +
                    "\nCity: " + city +
                    "\nCountry: " + country+
-                    "\nBill: " + bill+ "$";
+                    "\nBill: " + bill+ "$\n";
 
 
         }
