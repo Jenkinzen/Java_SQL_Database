@@ -24,7 +24,7 @@ public class Service {
 
 
 
-    public static ArrayList<Customers> valuesearchbycontainingsubstring(HashMap<String, ArrayList<Customers>> customerlist,CharSequence containedsubstring) {
+    public static ArrayList<Customers> valuesearchbycontainingsubstring(HashMap<String, ArrayList<Customers>> customerlist,String containedsubstring) {
         ArrayList<Customers>sortedbyinput = new ArrayList<>();
         for (String xxx : customerlist.keySet())
         {
@@ -77,6 +77,23 @@ public class Service {
             }
             return outputlist;
     }
+
+
+
+
+
+    //gib mir die ganzen Infos der Values des eingegebenen Keys
+    public static ArrayList<Customers> outputofcustomerwithsamestartingletters(HashMap<String, ArrayList<Customers>> list,String lastnameletter)
+    {
+        for(int i = 0; i < list.get(lastnameletter).toArray().length;i++) {
+            ArrayList<Customers> listbyletters = list.get(lastnameletter);
+            listbyletters.get(i);
+            System.out.println(listbyletters.get(i).getInfoShort());
+        }
+        return null;
+    }
+
+
 
 }
 
