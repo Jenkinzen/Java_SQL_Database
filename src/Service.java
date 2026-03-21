@@ -10,6 +10,7 @@ public class Service {
     public static HashMap<String, ArrayList<Customers>> createkeyandfillvaluesMultiValue(String keyvalue, HashMap<String, ArrayList<Customers>> hashmap,Customers customerinfo) {
         if (!hashmap.containsKey(keyvalue)) {
             hashmap.put(keyvalue, new ArrayList<>());
+            hashmap.get(keyvalue).add(customerinfo);
 
         } else {
             if (hashmap.containsKey(keyvalue)) {
@@ -20,23 +21,38 @@ public class Service {
 
         return hashmap;
     }
-    /// ////////// IRGENDWIE NULLPROOF MACHEN WEIL COMPANY > KEIN OUTPUT DA EIN KEY "null" IST UND XXX STRING SEIN MUSS
+
+//    public static ArrayList<Customers> valuesearchbycontainingsubstring(HashMap<String, ArrayList<Customers>> customerlist,CharSequence containedsubstring) {
+//            ArrayList<Customers> sortedbyinput = null;
+//            for (String xxx : customerlist.keySet()) {
+//                String xxxx = String.valueOf(xxx);
+//                sortedbyinput = new ArrayList<>();
+//                if (xxxx.contains(containedsubstring)) {
+//                    sortedbyinput = customerlist.get(xxxx);
+//                    for (int i = 0; i < sortedbyinput.size(); i++) {
+//                        System.out.println(sortedbyinput.get(i).getInfoShort());
+//                    }
+//                }
+//
+//            }
+//
+//        return sortedbyinput;
+//    }
+
     public static ArrayList<Customers> valuesearchbycontainingsubstring(HashMap<String, ArrayList<Customers>> customerlist,CharSequence containedsubstring) {
-            ArrayList<Customers> sortedbyinput = null;
-            for (String xxx : customerlist.keySet()) {
-                sortedbyinput = new ArrayList<>();
-                if (xxx.contains(null)) {
-                    continue;
-                }
-                if (xxx.contains(containedsubstring)) {
-                    sortedbyinput = customerlist.get(xxx);
-                    for (int i = 0; i < sortedbyinput.size(); i++) {
-                        System.out.println(sortedbyinput.get(i).getInfoShort());
-                    }
-                }
+        ArrayList<Customers>sortedbyinput = new ArrayList<>();
+        for (String xxx : customerlist.keySet())
+        {
 
+            String xxxtostring = String.valueOf(xxx);
+            if (xxxtostring.contains(containedsubstring))
+            {
+                for (int i = 0; i < customerlist.get(xxxtostring).size(); i++)
+                {
+                    sortedbyinput.add(customerlist.get(xxxtostring).get(i));
+                }
             }
-
+        }
         return sortedbyinput;
     }
 

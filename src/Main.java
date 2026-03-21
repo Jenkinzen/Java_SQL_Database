@@ -8,7 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
         DataAccess.getcustomerdata();
-        System.out.println(Storage.customers_sorted_by_company.keySet());
+        System.out.println(Storage.customers_sorted_by_company.entrySet());
 
 
         UI.mainmenu();

@@ -72,6 +72,7 @@ import java.util.Objects;
             return "\n\nID: " + id +
                     "\nFirst Name: " + firstname +
                     "\nLast Name: " + lastname +
+                    "\nCompany: " + company +
                     "\nAddress: " + address +
                     "\nCity: " + city +
                     "\nState: " + state +
@@ -81,7 +82,7 @@ import java.util.Objects;
                     "\nFax: " + fax +
                     "\nEmail: " + email +
                     "\nSupport Rep ID: " + supportrepid +
-                    "\nBill: " + bill + "$";
+                    "\nBill: " + bill + "$\n";
 
         }
 
