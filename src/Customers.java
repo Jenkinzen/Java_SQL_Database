@@ -2,9 +2,13 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 
-    public class Customers {
+public class Customers {
          String id;
          String firstname;
          String lastname;
@@ -90,6 +94,7 @@ import java.util.Objects;
         public String getId(){
             return id;
         }
+
         public String getFirstName() {
             return firstname;
         }
@@ -144,7 +149,10 @@ import java.util.Objects;
 
         }
 
-
+        public String BillAsString(){
+            String stringbill = String.valueOf(getBill());
+            return stringbill;
+        }
 
 
     }

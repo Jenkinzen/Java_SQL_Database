@@ -23,7 +23,6 @@ public class Service {
     }
 
 
-
     public static ArrayList<Customers> valuesearchbycontainingsubstring(HashMap<String, ArrayList<Customers>> customerlist,String containedsubstring) {
         ArrayList<Customers>sortedbyinput = new ArrayList<>();
         for (String xxx : customerlist.keySet())
