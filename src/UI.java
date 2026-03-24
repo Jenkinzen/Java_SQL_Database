@@ -26,7 +26,20 @@ public class UI {
 
     public static void printsoughtattribute(ArrayList<Customers> list, Function<Customers, String> getter) {
         for (int i = 0; i < list.size(); i++) {
+            System.out.println("CUSTOMER ID: "+list.get(i).getId()+"       "+ getter.apply(list.get(i)));
+        }
+    }
+
+
+    public static void printsoughtattributenoid(ArrayList<Customers> list, Function<Customers, String> getter) {
+        for (int i = 0; i < list.size(); i++) {
             System.out.println(getter.apply(list.get(i)));
+        }
+    }
+
+    public static void multiattributeprint(ArrayList<String> numberofchosencolumns,ArrayList<Customers> inputlist,String input){
+        for(int i = 0; i < inputlist.size();i++){
+            System.out.print(inputlist.get(i).getInfoDynamical(numberofchosencolumns,inputlist));
         }
     }
 
@@ -35,12 +48,30 @@ public class UI {
         System.out.println("What infos do you want to have displayed?\n1-all\n2-short\n3-select single columns\nchoice: ");
         int outputmenu = scanner.nextInt();
         if (outputmenu == 1) {
+            scanner.close();
             customerinfoall(list);
         }
         if (outputmenu == 2) {
             customerinfoshort(list);
         }
+
+
         if (outputmenu == 3) {
+            System.out.println("What columns do you want to have displayed,please seperate the numbers with a comma.\n\n1-Customer ID | 2-first name | 3-last name\n4-company | 5-address | 6-postal code" +
+                    "\n7-city | 8-country | 9-state | 10-phone \n11-fax | 12-support rep id | 13-bill | \n         0-previous menu");
+            ArrayList<String> columnnumbers = new ArrayList<>();
+            scanner.useDelimiter(",|\\R");  // ,|\\R    = , -> seperate at commas or \\R -> at the end of the line ( without it it doesnt recognize the last string of the input split)
+
+            while(scanner.hasNext()){
+                columnnumbers.add(scanner.next());
+                System.out.println(columnnumbers);
+            }
+
+            for(int i = 0; i< list.size();i++) {
+                System.out.println(list.get(i).getInfoDynamical(columnnumbers,list));
+                System.out.println("LINE IN THE GETINFODYNAMICAL OUTPUT LOOP");
+            }
+            System.out.println("LINE BEFORE RETURN");
             return;
         }
     }
@@ -76,7 +107,8 @@ public class UI {
                 String searcheverything = scanner.next();
                 ArrayList<Customers> outputid = listshortcut("customerid", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------CUSTOMER ID------------------------------------------");
-                printsoughtattribute(outputid, Customers::getId);
+                printsoughtattributenoid(outputid, Customers::getId);
+
 
                 ArrayList<Customers> outputfirstname = listshortcut("first_name", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------FIRST NAME------------------------------------------");
@@ -132,126 +164,126 @@ public class UI {
                 ArrayList<Customers> outputbill = listshortcut("bill", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------BILL------------------------------------------");
                 printsoughtattribute(outputbill, Customers::BillAsString);
+            }
 
 
-                if (auswahlsuche == 2) {
+            if (auswahlsuche == 2) {
+                while (true) {
+                    System.out.println("What column do you want to search in?\n\n1-Customer ID | 2-first name | 3-last name\n4-company | 5-address | 6-postal code" +
+                            "\n7-city | 8-country | 9-state | 10-phone \n11-fax | 12-support rep id | 13-bill | \n         0-previous menu");
+
+
+                    int columnsuche = scanner.nextInt();
+
+                    if (columnsuche == 0) {
+                        break;
+                    }
                     while (true) {
-                        System.out.println("What column do you want to search in?\n\n1-Customer ID | 2-first name | 3-last name\n4-company | 5-address | 6-postal code" +
-                                "\n7-city | 8-country | 9-state | 10-phone \n11-fax | 12-support rep id | 13-bill | \n         0-previous menu");
+                        if (columnsuche == 1) {
 
-
-                        int columnsuche = scanner.nextInt();
-
-                        if (columnsuche == 0) {
+                            System.out.println("Please insert what you want to search for: ");
+                            String customeridinput = scanner.next();
+                            listshortcut("customerid", customeridinput, Service::outputofcustomerwithsamestartingletters);
                             break;
                         }
-                        while (true) {
-                            if (columnsuche == 1) {
+                        if (columnsuche == 2) {
 
-                                System.out.println("Please insert what you want to search for: ");
-                                String customeridinput = scanner.next();
-                                listshortcut("customerid", customeridinput, Service::outputofcustomerwithsamestartingletters);
-                                break;
-                            }
-                            if (columnsuche == 2) {
-
-                                System.out.println("Please insert what you want to search: ");
-                                String firstnameinput = scanner.next();
-                                chooseinfooutput(listshortcut("first_name", firstnameinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 3) {
-
-                                System.out.println("Please insert what you want to search");
-                                String lastnameinput = scanner.next();
-                                //System.out.println(Service.valuesearchbycontainingsubstring(Storage.customersortedbycategories.get("last_name"), lastnameinput));
-                                chooseinfooutput(listshortcut("last_name", lastnameinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 4) {
-
-                                System.out.println("Please insert what you want to search");
-                                String companyinput = scanner.next();
-                                chooseinfooutput(listshortcut("company", companyinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 5) {
-
-                                System.out.println("Please insert what you want to search");
-                                String addressinput = scanner.next();
-                                chooseinfooutput(listshortcut("address", addressinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 6) {
-
-                                System.out.println("Please insert what you want to search");
-                                String postalcodeinput = scanner.next();
-                                chooseinfooutput(listshortcut("postalcode", postalcodeinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 7) {
-
-                                System.out.println("Please insert what you want to search");
-                                String cityinput = scanner.next();
-                                customerinfoshort(listshortcut("city", cityinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 8) {
-
-                                System.out.println("Please insert what you want to search");
-                                String countryinput = scanner.next();
-                                customerinfoshort(listshortcut("country", countryinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 9) {
-
-                                System.out.println("Please insert what you want to search");
-                                String stateinput = scanner.next();
-                                customerinfoshort(listshortcut("state", stateinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 10) {
-
-                                System.out.println("Please insert what you want to search");
-                                String phoneinput = scanner.next();
-                                customerinfoshort(listshortcut("phone", phoneinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 11) {
-
-                                System.out.println("Please insert what you want to search");
-                                String faxinput = scanner.next();
-                                customerinfoshort(listshortcut("fax", faxinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 12) {
-
-                                System.out.println("Please insert what you want to search");
-                                String supportrepidinput = scanner.next();
-                                customerinfoshort(listshortcut("supportrepid", supportrepidinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-                            if (columnsuche == 13) {
-
-                                System.out.println("Please insert what you want to search");
-                                String billinput = scanner.next();
-                                customerinfoshort(listshortcut("bill", billinput, Service::valuesearchbycontainingsubstring));
-                                return;
-                            }
-
+                            System.out.println("Please insert what you want to search: ");
+                            String firstnameinput = scanner.next();
+                            chooseinfooutput(listshortcut("first_name", firstnameinput, Service::valuesearchbycontainingsubstring));
+                            return;
                         }
+                        if (columnsuche == 3) {
+
+                            System.out.println("Please insert what you want to search");
+                            String lastnameinput = scanner.next();
+                            //System.out.println(Service.valuesearchbycontainingsubstring(Storage.customersortedbycategories.get("last_name"), lastnameinput));
+                            chooseinfooutput(listshortcut("last_name", lastnameinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 4) {
+
+                            System.out.println("Please insert what you want to search");
+                            String companyinput = scanner.next();
+                            chooseinfooutput(listshortcut("company", companyinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 5) {
+
+                            System.out.println("Please insert what you want to search");
+                            String addressinput = scanner.next();
+                            chooseinfooutput(listshortcut("address", addressinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 6) {
+
+                            System.out.println("Please insert what you want to search");
+                            String postalcodeinput = scanner.next();
+                            chooseinfooutput(listshortcut("postalcode", postalcodeinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 7) {
+
+                            System.out.println("Please insert what you want to search");
+                            String cityinput = scanner.next();
+                            customerinfoshort(listshortcut("city", cityinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 8) {
+
+                            System.out.println("Please insert what you want to search");
+                            String countryinput = scanner.next();
+                            customerinfoshort(listshortcut("country", countryinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 9) {
+
+                            System.out.println("Please insert what you want to search");
+                            String stateinput = scanner.next();
+                            customerinfoshort(listshortcut("state", stateinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 10) {
+
+                            System.out.println("Please insert what you want to search");
+                            String phoneinput = scanner.next();
+                            customerinfoshort(listshortcut("phone", phoneinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 11) {
+
+                            System.out.println("Please insert what you want to search");
+                            String faxinput = scanner.next();
+                            customerinfoshort(listshortcut("fax", faxinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 12) {
+
+                            System.out.println("Please insert what you want to search");
+                            String supportrepidinput = scanner.next();
+                            customerinfoshort(listshortcut("supportrepid", supportrepidinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+                        if (columnsuche == 13) {
+
+                            System.out.println("Please insert what you want to search");
+                            String billinput = scanner.next();
+                            customerinfoshort(listshortcut("bill", billinput, Service::valuesearchbycontainingsubstring));
+                            return;
+                        }
+
                     }
                 }
+            }
 
-                if (auswahlsuche == 3) {
+            if (auswahlsuche == 3) {
 
-                    customerinfoshort(listshortcut("customerid", "", Service::valuesearchbycontainingsubstring));
+                customerinfoshort(listshortcut("customerid", "", Service::valuesearchbycontainingsubstring));
 
-                }
+            }
 
-                if (auswahlsuche == 0) {
-                    break;
-                }
+            if (auswahlsuche == 0) {
+                break;
             }
         }
     }
