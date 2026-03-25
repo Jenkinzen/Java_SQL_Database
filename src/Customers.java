@@ -84,7 +84,7 @@ public class Customers {
 
         }
 
-    public ArrayList<String> getInfoDynamical(ArrayList<String> input, ArrayList<Customers> list) {
+    public ArrayList<String> getInfoDynamical(String input, ArrayList<Customers> list) {
             ArrayList<String> output = new ArrayList<>();
 
             for(int i = 0; i < list.size();i++) {
@@ -99,39 +99,47 @@ public class Customers {
                 if (input.contains("3")) {
                     output.add(getLastName());
                 }
+
                 if (input.contains("4")) {
                     output.add(getAddress());
                 }
+
                 if (input.contains("5")) {
                     output.add(getCity());
                 }
+
                 if (input.contains("6")) {
                     output.add(getState());
                 }
+
                 if (input.contains("7")) {
                     output.add(getCountry());
                 }
+
                 if (input.contains("8")) {
-                    output.add(getState());
-                }
-                if (input.contains("9")) {
                     output.add(getPostalcode());
                 }
-                if (input.contains("10")) {
+
+                if (input.contains("9")) {
                     output.add(getPhone());
                 }
-                if (input.contains("11")) {
+
+                if (input.contains("10")) {
                     output.add(getFax());
                 }
-                if (input.contains("12")) {
+
+                if (input.contains("11")) {
                     output.add(getEmail());
                 }
-                if (input.contains("13")) {
+
+                if (input.contains("12")) {
                     output.add(getSupportrepid());
                 }
-                if (input.contains("14")) {
+
+                if (input.contains("13")) {
                     output.add(BillAsString());
                 }
+
             }
         return output;
     }

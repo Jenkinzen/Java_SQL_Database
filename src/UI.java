@@ -37,7 +37,7 @@ public class UI {
         }
     }
 
-    public static void multiattributeprint(ArrayList<String> numberofchosencolumns,ArrayList<Customers> inputlist,String input){
+    public static void multiattributeprint(String numberofchosencolumns,ArrayList<Customers> inputlist,String input){
         for(int i = 0; i < inputlist.size();i++){
             System.out.print(inputlist.get(i).getInfoDynamical(numberofchosencolumns,inputlist));
         }
@@ -48,7 +48,6 @@ public class UI {
         System.out.println("What infos do you want to have displayed?\n1-all\n2-short\n3-select single columns\nchoice: ");
         int outputmenu = scanner.nextInt();
         if (outputmenu == 1) {
-            scanner.close();
             customerinfoall(list);
         }
         if (outputmenu == 2) {
@@ -56,24 +55,22 @@ public class UI {
         }
 
 
-        if (outputmenu == 3) {
-            System.out.println("What columns do you want to have displayed,please seperate the numbers with a comma.\n\n1-Customer ID | 2-first name | 3-last name\n4-company | 5-address | 6-postal code" +
-                    "\n7-city | 8-country | 9-state | 10-phone \n11-fax | 12-support rep id | 13-bill | \n         0-previous menu");
-            ArrayList<String> columnnumbers = new ArrayList<>();
-            scanner.useDelimiter(",|\\R");  // ,|\\R    = , -> seperate at commas or \\R -> at the end of the line ( without it it doesnt recognize the last string of the input split)
+        if (outputmenu == 3)
+        {
+            System.out.println("What columns do you want to have displayed,please seperate the numbers with a comma.\n\n1-Customer ID | 2-first name | 3-last name\n4-address | 5-city | 6-state" +
+                    "\n7-country | 8-postalcode | 9-phone | 10-fax \n11-email | 12-support rep id | 13-bill | \n         0-previous menu");
 
-            while(scanner.hasNext()){
-                columnnumbers.add(scanner.next());
-                System.out.println(columnnumbers);
-            }
+            String columnnumbers = scanner.next();
 
-            for(int i = 0; i< list.size();i++) {
-                System.out.println(list.get(i).getInfoDynamical(columnnumbers,list));
+
+            for (int i = 0; i < list.size(); i++)
+            {
+                System.out.println(list.get(i).getInfoDynamical(columnnumbers, list));
                 System.out.println("LINE IN THE GETINFODYNAMICAL OUTPUT LOOP");
             }
-            System.out.println("LINE BEFORE RETURN");
-            return;
+            System.out.println("GNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHH");
         }
+
     }
 
 
