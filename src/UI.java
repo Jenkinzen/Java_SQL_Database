@@ -24,10 +24,10 @@ public class UI {
         }
     }
 
-    public static void printsoughtattribute(ArrayList<Customers> list, Function<Customers, String> getter) {
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println("CUSTOMER ID: "+list.get(i).getId()+"       "+ getter.apply(list.get(i)));
-        }
+    public static String getsoughtattribute(ArrayList<Customers> list, Function<Customers, String> getter) {
+
+            return getter.apply(list.get(0));
+
     }
 
 
@@ -37,9 +37,63 @@ public class UI {
         }
     }
 
-    public static void multiattributeprint(String numberofchosencolumns,ArrayList<Customers> inputlist,String input){
+    public static void multiattributeprint(String numberofchosencolumns,ArrayList<Customers> inputlist){
         for(int i = 0; i < inputlist.size();i++){
-            System.out.print(inputlist.get(i).getInfoDynamical(numberofchosencolumns,inputlist));
+            inputlist.get(i).getInfoDynamical(numberofchosencolumns,inputlist);
+
+            System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CUSTOMER #" + ((i)+1) + " XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
+            if (numberofchosencolumns.contains("1")) {
+                System.out.println("\nCustomer ID: " + getsoughtattribute(inputlist,Customers::getId));
+            }
+
+            if (numberofchosencolumns.contains("2")) {
+                System.out.println("First Name: " + getsoughtattribute(inputlist,Customers::getFirstName));
+            }
+
+            if (numberofchosencolumns.contains("3")) {
+                System.out.println("Last Name: " + getsoughtattribute(inputlist,Customers::getLastName));
+            }
+
+            if (numberofchosencolumns.contains("4")) {
+                System.out.println("Address: " + getsoughtattribute(inputlist,Customers::getAddress));
+            }
+
+            if (numberofchosencolumns.contains("5")) {
+                System.out.println("City: " + getsoughtattribute(inputlist,Customers::getCity));
+            }
+
+            if (numberofchosencolumns.contains("6")) {
+                System.out.println("State: " + getsoughtattribute(inputlist,Customers::getState));
+            }
+
+            if (numberofchosencolumns.contains("7")) {
+                System.out.println("Country: " + getsoughtattribute(inputlist,Customers::getCountry));
+            }
+
+            if (numberofchosencolumns.contains("8")) {
+                System.out.println("Postal Code: " + getsoughtattribute(inputlist,Customers::getPostalcode));
+            }
+
+            if (numberofchosencolumns.contains("9")) {
+                System.out.println("Phone: " + getsoughtattribute(inputlist,Customers::getPhone));
+            }
+
+            if (numberofchosencolumns.contains("10")) {
+                System.out.println("Fax: " + getsoughtattribute(inputlist,Customers::getFax));
+            }
+
+            if (numberofchosencolumns.contains("11")) {
+                System.out.println("Email: " + getsoughtattribute(inputlist,Customers::getEmail));
+            }
+
+            if (numberofchosencolumns.contains("12")) {
+                System.out.println("Support Rep ID: " + getsoughtattribute(inputlist,Customers::getSupportrepid));
+            }
+
+            if (numberofchosencolumns.contains("13")) {
+                System.out.println("Bill: " + getsoughtattribute(inputlist,Customers::BillAsString)+ "\n");
+            }
         }
     }
 
@@ -50,10 +104,10 @@ public class UI {
         if (outputmenu == 1) {
             customerinfoall(list);
         }
+
         if (outputmenu == 2) {
             customerinfoshort(list);
         }
-
 
         if (outputmenu == 3)
         {
@@ -66,6 +120,8 @@ public class UI {
             for (int i = 0; i < list.size(); i++)
             {
                 System.out.println(list.get(i).getInfoDynamical(columnnumbers, list));
+                System.out.println("UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU");
+                multiattributeprint(columnnumbers,list);
                 System.out.println("LINE IN THE GETINFODYNAMICAL OUTPUT LOOP");
             }
             System.out.println("GNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHH");
@@ -109,58 +165,58 @@ public class UI {
 
                 ArrayList<Customers> outputfirstname = listshortcut("first_name", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------FIRST NAME------------------------------------------");
-                printsoughtattribute(outputfirstname, Customers::getFirstName);
+                getsoughtattribute(outputfirstname, Customers::getFirstName);
 
                 ArrayList<Customers> outputlastname = listshortcut("last_name", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------LAST NAME------------------------------------------");
-                printsoughtattribute(outputlastname, Customers::getFirstName);
+                getsoughtattribute(outputlastname, Customers::getFirstName);
 
                 ArrayList<Customers> outputcompany = listshortcut("company", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------COMPANY------------------------------------------");
-                printsoughtattribute(outputcompany, Customers::getCompany);
+                getsoughtattribute(outputcompany, Customers::getCompany);
 
                 ArrayList<Customers> outputaddress = listshortcut("address", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------ADDRESS------------------------------------------");
-                printsoughtattribute(outputaddress, Customers::getAddress);
+                getsoughtattribute(outputaddress, Customers::getAddress);
 
                 ArrayList<Customers> outputpostalcode = listshortcut("postalcode", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------POSTAL CODE------------------------------------------");
-                printsoughtattribute(outputpostalcode, Customers::getPostalcode);
+                getsoughtattribute(outputpostalcode, Customers::getPostalcode);
 
 
                 ArrayList<Customers> outputcity = listshortcut("city", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------CITY------------------------------------------");
-                printsoughtattribute(outputcity, Customers::getCity);
+                getsoughtattribute(outputcity, Customers::getCity);
 
 
                 ArrayList<Customers> outputcountry = listshortcut("country", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------COUNTRY------------------------------------------");
-                printsoughtattribute(outputcountry, Customers::getCountry);
+                getsoughtattribute(outputcountry, Customers::getCountry);
 
 
                 ArrayList<Customers> outputstate = listshortcut("state", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------STATE------------------------------------------");
-                printsoughtattribute(outputstate, Customers::getAddress);
+                getsoughtattribute(outputstate, Customers::getAddress);
 
 
                 ArrayList<Customers> outputphone = listshortcut("phone", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------PHONE------------------------------------------");
-                printsoughtattribute(outputphone, Customers::getPhone);
+                getsoughtattribute(outputphone, Customers::getPhone);
 
 
                 ArrayList<Customers> outputfax = listshortcut("fax", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------FAX------------------------------------------");
-                printsoughtattribute(outputfax, Customers::getFax);
+                getsoughtattribute(outputfax, Customers::getFax);
 
 
                 ArrayList<Customers> outputsupportrepid = listshortcut("supportrepid", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------SUPPORT REP ID------------------------------------------");
-                printsoughtattribute(outputsupportrepid, Customers::getSupportrepid);
+                getsoughtattribute(outputsupportrepid, Customers::getSupportrepid);
 
 
                 ArrayList<Customers> outputbill = listshortcut("bill", searcheverything, Service::valuesearchbycontainingsubstring);
                 System.out.println("----------------------------------------BILL------------------------------------------");
-                printsoughtattribute(outputbill, Customers::BillAsString);
+                getsoughtattribute(outputbill, Customers::BillAsString);
             }
 
 

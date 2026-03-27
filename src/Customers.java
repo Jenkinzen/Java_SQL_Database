@@ -87,7 +87,7 @@ public class Customers {
     public ArrayList<String> getInfoDynamical(String input, ArrayList<Customers> list) {
             ArrayList<String> output = new ArrayList<>();
 
-            for(int i = 0; i < list.size();i++) {
+
                 if (input.contains("1")) {
                     output.add(getId());
                 }
@@ -109,7 +109,7 @@ public class Customers {
                 }
 
                 if (input.contains("6")) {
-                    output.add(getState());
+                    output.add(String.valueOf(getState()));
                 }
 
                 if (input.contains("7")) {
@@ -140,7 +140,7 @@ public class Customers {
                     output.add(BillAsString());
                 }
 
-            }
+
         return output;
     }
 
@@ -171,7 +171,7 @@ public class Customers {
         }
 
         public String getState() {
-            return lastname;
+            return state;
         }
 
         public String getCountry() {
