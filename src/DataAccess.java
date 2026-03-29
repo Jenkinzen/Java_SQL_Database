@@ -23,7 +23,7 @@ public class DataAccess
 
             //Erstellen einer HashMap und Rechnung einfügen insofern es für die customerid noch keine gibt
 
-            Service.getandroundfinalsum(Storage.customer_bill_by_id, customerid, bill);
+            Service.getAndRoundFinalSum(Storage.customer_bill_by_id, customerid, bill);
 
 
         }
@@ -55,24 +55,24 @@ public class DataAccess
 
 
             //Customer(Value) werden nach Anfangsbuchstabe des Nachnamens(Key) in customer_sorted_by_lastname_letter gepackt
-            Service.sortedbystartingletters(firstname, Storage.customers_sorted_by_firstname_letter, c);
-            Service.sortedbystartingletters(lastname, Storage.customers_sorted_by_lastname_letter, c);
+            Service.sortedByStartingLetters(firstname, Storage.customers_sorted_by_firstname_letter, c);
+            Service.sortedByStartingLetters(lastname, Storage.customers_sorted_by_lastname_letter, c);
 
 
             //Mehrere Values werden einem Key zugewiesen
-            Service.createkeyandfillvaluesMultiValue(address, Storage.customers_sorted_by_address, c);
-            Service.createkeyandfillvaluesMultiValue(city, Storage.customers_sorted_by_city, c);
-            Service.createkeyandfillvaluesMultiValue(country, Storage.customers_sorted_by_country, c);
-            Service.createkeyandfillvaluesMultiValue(state, Storage.customers_sorted_by_state, c);
-            Service.createkeyandfillvaluesMultiValue(company, Storage.customers_sorted_by_company, c);
-            Service.createkeyandfillvaluesMultiValue(postalcode, Storage.customers_sorted_by_postalcode, c);
-            Service.createkeyandfillvaluesMultiValue(supportrepid, Storage.customers_sorted_by_supportrepid, c);
+            Service.createKeyAndFillValuesMultiValue(address, Storage.customers_sorted_by_address, c);
+            Service.createKeyAndFillValuesMultiValue(city, Storage.customers_sorted_by_city, c);
+            Service.createKeyAndFillValuesMultiValue(country, Storage.customers_sorted_by_country, c);
+            Service.createKeyAndFillValuesMultiValue(state, Storage.customers_sorted_by_state, c);
+            Service.createKeyAndFillValuesMultiValue(company, Storage.customers_sorted_by_company, c);
+            Service.createKeyAndFillValuesMultiValue(postalcode, Storage.customers_sorted_by_postalcode, c);
+            Service.createKeyAndFillValuesMultiValue(supportrepid, Storage.customers_sorted_by_supportrepid, c);
 
             //Eine Value wird einem Key zugewiesen
-            Service.createkeyandfillvaluesSingleValue(lastname, Storage.customers_sorted_by_lastname, c);
-            Service.createkeyandfillvaluesSingleValue(firstname, Storage.customers_sorted_by_firstname, c);
-            Service.createkeyandfillvaluesSingleValue(customerid, Storage.customers_sorted_by_id, c);
-            Service.createkeyandfillvaluesSingleValue(email, Storage.customers_sorted_by_email, c);
+            Service.createKeyAndFillValuesSingleValue(lastname, Storage.customers_sorted_by_lastname, c);
+            Service.createKeyAndFillValuesSingleValue(firstname, Storage.customers_sorted_by_firstname, c);
+            Service.createKeyAndFillValuesSingleValue(customerid, Storage.customers_sorted_by_id, c);
+            Service.createKeyAndFillValuesSingleValue(email, Storage.customers_sorted_by_email, c);
 
 
             //Übergeordnete HashMap (quasi Hauptmenü um sachen bezüglich Customer zu finden)
