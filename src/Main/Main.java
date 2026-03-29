@@ -1,7 +1,8 @@
-import java.sql.Array;
-import java.sql.DriverManager;
+package Main;
+
+import DataAccessAndConnection.DataAccess;
+
 import java.sql.SQLException;
-import java.util.*;
 
 public class Main {
 
@@ -11,7 +12,7 @@ public class Main {
         
 
 
-        UI.mainmenu();
+        UI.UI.mainMenu();
 
     }
 

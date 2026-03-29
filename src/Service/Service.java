@@ -1,3 +1,8 @@
+package Service;
+
+import Customers.Customers;
+import Storage.Storage;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.BiFunction;
@@ -10,7 +15,7 @@ public class Service {
     // else -> wenn es eine gibt die Values in die ArrayList der HashMap einfügen
 
     //SQL-DATACONVERTING FUNCTIONS//////////////////////////////////////////////////////////////////////////////////////
-    public static HashMap<String, ArrayList<Customers>> createKeyAndFillValuesMultiValue(String keyvalue, HashMap<String, ArrayList<Customers>> hashmap,Customers customerinfo) {
+    public static HashMap<String, ArrayList<Customers>> createKeyAndFillValuesMultiValue(String keyvalue, HashMap<String, ArrayList<Customers>> hashmap, Customers customerinfo) {
         if (!hashmap.containsKey(keyvalue)) {
             hashmap.put(keyvalue, new ArrayList<>());
             hashmap.get(keyvalue).add(customerinfo);
@@ -63,7 +68,7 @@ public class Service {
 
     public static String getSoughtAttribute(ArrayList<Customers> list, Function<Customers, String> getter) {
 
-        return getter.apply(list.get(0));
+            return getter.apply(list.get(0));
 
     }
 
@@ -71,9 +76,15 @@ public class Service {
         return Storage.customersortedbycategories.get(listname);
     }
 
-    public static ArrayList<Customers> applyFunctionOnList(String listname, String scannerinput, BiFunction<HashMap<String, ArrayList<Customers>>, String, ArrayList<Customers>> output) {
-        return output.apply(listShortCut(listname), scannerinput);
+    public static ArrayList<Customers> applyFunctionOnList(String listname, String scannerinput, BiFunction<HashMap<String, ArrayList<Customers>>, String, ArrayList<Customers>> output)
+        {   ArrayList<Customers> outputresult = new ArrayList<>();
+            for(int i = 0; i < listShortCut(listname).size();i++)
+            {
+            outputresult =  output.apply(listShortCut(listname), scannerinput);
+            }
+            return outputresult;
     }
+
 
     public static ArrayList<Customers> valueSearchByContainingSubString(HashMap<String, ArrayList<Customers>> customerlist,String containedsubstring) {
         ArrayList<Customers>sortedbyinput = new ArrayList<>();

@@ -1,5 +1,6 @@
+package Customers;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 public class Customers {
@@ -19,20 +20,20 @@ public class Customers {
          Double bill;
 
 
-        Customers(String id,
-                  String firstname,
-                  String lastname,
-                  String address,
-                  String city,
-                  String country,
-                  String company,
-                  String state,
-                  String phone,
-                  String postalcode,
-                  String fax,
-                  String email,
-                  String supportrepid,
-                  Double bill
+        public Customers(String id,
+                         String firstname,
+                         String lastname,
+                         String address,
+                         String city,
+                         String country,
+                         String company,
+                         String state,
+                         String phone,
+                         String postalcode,
+                         String fax,
+                         String email,
+                         String supportrepid,
+                         Double bill
         ) {
             this.id = id;
             this.firstname = firstname;

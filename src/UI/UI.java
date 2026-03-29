@@ -1,9 +1,10 @@
-import java.lang.reflect.Array;
+package UI;
+
+
+import Customers.Customers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class UI {
@@ -34,55 +35,55 @@ public class UI {
             System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CUSTOMER #" + ((i)+1) + " XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
             if (numberofchosencolumns.contains("1")) {
-                System.out.println("\nCustomer ID: " + Service.getSoughtAttribute(inputlist,Customers::getId));
+                System.out.println("\nCustomer ID: " + Service.Service.getSoughtAttribute(inputlist,Customers::getId));
             }
 
             if (numberofchosencolumns.contains("2")) {
-                System.out.println("First Name: " + Service.getSoughtAttribute(inputlist,Customers::getFirstName));
+                System.out.println("First Name: " + Service.Service.getSoughtAttribute(inputlist,Customers::getFirstName));
             }
 
             if (numberofchosencolumns.contains("3")) {
-                System.out.println("Last Name: " + Service.getSoughtAttribute(inputlist,Customers::getLastName));
+                System.out.println("Last Name: " + Service.Service.getSoughtAttribute(inputlist,Customers::getLastName));
             }
 
             if (numberofchosencolumns.contains("4")) {
-                System.out.println("Address: " + Service.getSoughtAttribute(inputlist,Customers::getAddress));
+                System.out.println("Address: " + Service.Service.getSoughtAttribute(inputlist,Customers::getAddress));
             }
 
             if (numberofchosencolumns.contains("5")) {
-                System.out.println("City: " + Service.getSoughtAttribute(inputlist,Customers::getCity));
+                System.out.println("City: " + Service.Service.getSoughtAttribute(inputlist,Customers::getCity));
             }
 
             if (numberofchosencolumns.contains("6")) {
-                System.out.println("State: " + Service.getSoughtAttribute(inputlist,Customers::getState));
+                System.out.println("State: " + Service.Service.getSoughtAttribute(inputlist,Customers::getState));
             }
 
             if (numberofchosencolumns.contains("7")) {
-                System.out.println("Country: " + Service.getSoughtAttribute(inputlist,Customers::getCountry));
+                System.out.println("Country: " + Service.Service.getSoughtAttribute(inputlist,Customers::getCountry));
             }
 
             if (numberofchosencolumns.contains("8")) {
-                System.out.println("Postal Code: " + Service.getSoughtAttribute(inputlist,Customers::getPostalcode));
+                System.out.println("Postal Code: " + Service.Service.getSoughtAttribute(inputlist,Customers::getPostalcode));
             }
 
             if (numberofchosencolumns.contains("9")) {
-                System.out.println("Phone: " + Service.getSoughtAttribute(inputlist,Customers::getPhone));
+                System.out.println("Phone: " + Service.Service.getSoughtAttribute(inputlist,Customers::getPhone));
             }
 
             if (numberofchosencolumns.contains("10")) {
-                System.out.println("Fax: " + Service.getSoughtAttribute(inputlist,Customers::getFax));
+                System.out.println("Fax: " + Service.Service.getSoughtAttribute(inputlist,Customers::getFax));
             }
 
             if (numberofchosencolumns.contains("11")) {
-                System.out.println("Email: " + Service.getSoughtAttribute(inputlist,Customers::getEmail));
+                System.out.println("Email: " + Service.Service.getSoughtAttribute(inputlist,Customers::getEmail));
             }
 
             if (numberofchosencolumns.contains("12")) {
-                System.out.println("Support Rep ID: " + Service.getSoughtAttribute(inputlist,Customers::getSupportrepid));
+                System.out.println("Support Rep ID: " + Service.Service.getSoughtAttribute(inputlist,Customers::getSupportrepid));
             }
 
             if (numberofchosencolumns.contains("13")) {
-                System.out.println("Bill: " + Service.getSoughtAttribute(inputlist,Customers::BillAsString)+ "\n");
+                System.out.println("Bill: " + Service.Service.getSoughtAttribute(inputlist,Customers::BillAsString)+ "\n");
             }
         }
     }
@@ -100,7 +101,7 @@ public class UI {
     /// MENUFUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public static void infooutputmenu(ArrayList<Customers> list) {
+    public static void infoOutPutMenu(ArrayList<Customers> list) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("What infos do you want to have displayed?\n1-all\n2-short\n3-select single columns\nchoice: ");
         int outputmenu = scanner.nextInt();
@@ -128,13 +129,13 @@ public class UI {
 
     }
 
-    public static void mainmenu() {
+    public static void mainMenu() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Welcome to the main menu\nWhat do you want to do??\n1-Search Customer Database\n2-blabla\n3-blablabla\nInput: ");
             int auswahlmenu = scanner.nextInt();
             if (auswahlmenu == 1) {
-                customermenu();
+                customerMenu();
             }
             if (auswahlmenu == 2) {
                 break;
@@ -146,7 +147,7 @@ public class UI {
 
     }
 
-    public static void customermenu() {
+    public static void customerMenu() {
         while (true) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("What do you want to search?\n1-Search in the whole Customer Database\n2-Search in a certain column\n3-Get all Customer entries\n0-mainmenu \nInput: ");
@@ -156,65 +157,65 @@ public class UI {
             if (auswahlsuche == 1) {
                 System.out.println("Insert your keyword: ");
                 String searcheverything = scanner.next();
-                ArrayList<Customers> outputid = Service.applyFunctionOnList("customerid", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputid = Service.Service.applyFunctionOnList("customerid", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------CUSTOMER ID------------------------------------------");
                 printSoughtAttributeNoId(outputid, Customers::getId);
 
 
-                ArrayList<Customers> outputfirstname = Service.applyFunctionOnList("first_name", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputfirstname = Service.Service.applyFunctionOnList("first_name", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------FIRST NAME------------------------------------------");
-                Service.getSoughtAttribute(outputfirstname, Customers::getFirstName);
+                Service.Service.getSoughtAttribute(outputfirstname, Customers::getFirstName);
 
-                ArrayList<Customers> outputlastname = Service.applyFunctionOnList("last_name", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputlastname = Service.Service.applyFunctionOnList("last_name", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------LAST NAME------------------------------------------");
-                Service.getSoughtAttribute(outputlastname, Customers::getFirstName);
+                Service.Service.getSoughtAttribute(outputlastname, Customers::getFirstName);
 
-                ArrayList<Customers> outputcompany = Service.applyFunctionOnList("company", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputcompany = Service.Service.applyFunctionOnList("company", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------COMPANY------------------------------------------");
-                Service.getSoughtAttribute(outputcompany, Customers::getCompany);
+                Service.Service.getSoughtAttribute(outputcompany, Customers::getCompany);
 
-                ArrayList<Customers> outputaddress = Service.applyFunctionOnList("address", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputaddress = Service.Service.applyFunctionOnList("address", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------ADDRESS------------------------------------------");
-                Service.getSoughtAttribute(outputaddress, Customers::getAddress);
+                Service.Service.getSoughtAttribute(outputaddress, Customers::getAddress);
 
-                ArrayList<Customers> outputpostalcode = Service.applyFunctionOnList("postalcode", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputpostalcode = Service.Service.applyFunctionOnList("postalcode", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------POSTAL CODE------------------------------------------");
-                Service.getSoughtAttribute(outputpostalcode, Customers::getPostalcode);
+                Service.Service.getSoughtAttribute(outputpostalcode, Customers::getPostalcode);
 
 
-                ArrayList<Customers> outputcity = Service.applyFunctionOnList("city", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputcity = Service.Service.applyFunctionOnList("city", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------CITY------------------------------------------");
-                Service.getSoughtAttribute(outputcity, Customers::getCity);
+                Service.Service.getSoughtAttribute(outputcity, Customers::getCity);
 
 
-                ArrayList<Customers> outputcountry = Service.applyFunctionOnList("country", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputcountry = Service.Service.applyFunctionOnList("country", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------COUNTRY------------------------------------------");
-                Service.getSoughtAttribute(outputcountry, Customers::getCountry);
+                Service.Service.getSoughtAttribute(outputcountry, Customers::getCountry);
 
 
-                ArrayList<Customers> outputstate = Service.applyFunctionOnList("state", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputstate = Service.Service.applyFunctionOnList("state", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------STATE------------------------------------------");
-                Service.getSoughtAttribute(outputstate, Customers::getAddress);
+                Service.Service.getSoughtAttribute(outputstate, Customers::getAddress);
 
 
-                ArrayList<Customers> outputphone = Service.applyFunctionOnList("phone", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputphone = Service.Service.applyFunctionOnList("phone", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------PHONE------------------------------------------");
-                Service.getSoughtAttribute(outputphone, Customers::getPhone);
+                Service.Service.getSoughtAttribute(outputphone, Customers::getPhone);
 
 
-                ArrayList<Customers> outputfax = Service.applyFunctionOnList("fax", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputfax = Service.Service.applyFunctionOnList("fax", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------FAX------------------------------------------");
-                Service.getSoughtAttribute(outputfax, Customers::getFax);
+                Service.Service.getSoughtAttribute(outputfax, Customers::getFax);
 
 
-                ArrayList<Customers> outputsupportrepid = Service.applyFunctionOnList("supportrepid", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputsupportrepid = Service.Service.applyFunctionOnList("supportrepid", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------SUPPORT REP ID------------------------------------------");
-                Service.getSoughtAttribute(outputsupportrepid, Customers::getSupportrepid);
+                Service.Service.getSoughtAttribute(outputsupportrepid, Customers::getSupportrepid);
 
 
-                ArrayList<Customers> outputbill = Service.applyFunctionOnList("bill", searcheverything, Service::valueSearchByContainingSubString);
+                ArrayList<Customers> outputbill = Service.Service.applyFunctionOnList("bill", searcheverything, Service.Service::valueSearchByContainingSubString);
                 System.out.println("----------------------------------------BILL------------------------------------------");
-                Service.getSoughtAttribute(outputbill, Customers::BillAsString);
+                Service.Service.getSoughtAttribute(outputbill, Customers::BillAsString);
             }
 
             if (auswahlsuche == 2) {
@@ -233,92 +234,92 @@ public class UI {
 
                             System.out.println("Please insert what you want to search for: ");
                             String customeridinput = scanner.next();
-                            Service.applyFunctionOnList("customerid", customeridinput,UI::outputOfCustomerWithSameStartingCharacters);
+                            Service.Service.applyFunctionOnList("customerid", customeridinput,UI::outputOfCustomerWithSameStartingCharacters);
                             break;
                         }
                         if (columnsuche == 2) {
 
                             System.out.println("Please insert what you want to search: ");
                             String firstnameinput = scanner.next();
-                            infooutputmenu(Service.applyFunctionOnList("first_name", firstnameinput, Service::valueSearchByContainingSubString));
+                            infoOutPutMenu(Service.Service.applyFunctionOnList("first_name", firstnameinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 3) {
 
                             System.out.println("Please insert what you want to search");
                             String lastnameinput = scanner.next();
-                            //System.out.println(Service.valueSearchByContainingSubString(Storage.customersortedbycategories.get("last_name"), lastnameinput));
-                            infooutputmenu(Service.applyFunctionOnList("last_name", lastnameinput, Service::valueSearchByContainingSubString));
+                            //System.out.println(Service.Service.valueSearchByContainingSubString(Storage.customersortedbycategories.get("last_name"), lastnameinput));
+                            infoOutPutMenu(Service.Service.applyFunctionOnList("last_name", lastnameinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 4) {
 
                             System.out.println("Please insert what you want to search");
                             String companyinput = scanner.next();
-                            infooutputmenu(Service.applyFunctionOnList("company", companyinput, Service::valueSearchByContainingSubString));
+                            infoOutPutMenu(Service.Service.applyFunctionOnList("company", companyinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 5) {
 
                             System.out.println("Please insert what you want to search");
                             String addressinput = scanner.next();
-                            infooutputmenu(Service.applyFunctionOnList("address", addressinput, Service::valueSearchByContainingSubString));
+                            infoOutPutMenu(Service.Service.applyFunctionOnList("address", addressinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 6) {
 
                             System.out.println("Please insert what you want to search");
                             String postalcodeinput = scanner.next();
-                            infooutputmenu(Service.applyFunctionOnList("postalcode", postalcodeinput, Service::valueSearchByContainingSubString));
+                            infoOutPutMenu(Service.Service.applyFunctionOnList("postalcode", postalcodeinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 7) {
 
                             System.out.println("Please insert what you want to search");
                             String cityinput = scanner.next();
-                            customerInfoShort(Service.applyFunctionOnList("city", cityinput, Service::valueSearchByContainingSubString));
+                            customerInfoShort(Service.Service.applyFunctionOnList("city", cityinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 8) {
 
                             System.out.println("Please insert what you want to search");
                             String countryinput = scanner.next();
-                            customerInfoShort(Service.applyFunctionOnList("country", countryinput, Service::valueSearchByContainingSubString));
+                            customerInfoShort(Service.Service.applyFunctionOnList("country", countryinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 9) {
 
                             System.out.println("Please insert what you want to search");
                             String stateinput = scanner.next();
-                            customerInfoShort(Service.applyFunctionOnList("state", stateinput, Service::valueSearchByContainingSubString));
+                            customerInfoShort(Service.Service.applyFunctionOnList("state", stateinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 10) {
 
                             System.out.println("Please insert what you want to search");
                             String phoneinput = scanner.next();
-                            customerInfoShort(Service.applyFunctionOnList("phone", phoneinput, Service::valueSearchByContainingSubString));
+                            customerInfoShort(Service.Service.applyFunctionOnList("phone", phoneinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 11) {
 
                             System.out.println("Please insert what you want to search");
                             String faxinput = scanner.next();
-                            customerInfoShort(Service.applyFunctionOnList("fax", faxinput, Service::valueSearchByContainingSubString));
+                            customerInfoShort(Service.Service.applyFunctionOnList("fax", faxinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 12) {
 
                             System.out.println("Please insert what you want to search");
                             String supportrepidinput = scanner.next();
-                            customerInfoShort(Service.applyFunctionOnList("supportrepid", supportrepidinput, Service::valueSearchByContainingSubString));
+                            customerInfoShort(Service.Service.applyFunctionOnList("supportrepid", supportrepidinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
                         if (columnsuche == 13) {
 
                             System.out.println("Please insert what you want to search");
                             String billinput = scanner.next();
-                            customerInfoShort(Service.applyFunctionOnList("bill", billinput, Service::valueSearchByContainingSubString));
+                            customerInfoShort(Service.Service.applyFunctionOnList("bill", billinput, Service.Service::valueSearchByContainingSubString));
                             return;
                         }
 
@@ -328,7 +329,7 @@ public class UI {
 
             if (auswahlsuche == 3) {
 
-                customerInfoAll(Service.applyFunctionOnList("customerid", "", Service::valueSearchByContainingSubString));
+                customerInfoAll(Service.Service.applyFunctionOnList("customerid", "", Service.Service::valueSearchByContainingSubString));
 
             }
 
