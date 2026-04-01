@@ -66,10 +66,9 @@ public class Service {
             return outputlist;
     }
 
-    public static String getSoughtAttribute(ArrayList<Customers> list, Function<Customers, String> getter) {
-
-            return getter.apply(list.get(0));
-
+    public static String getSoughtAttribute(Customers customer, Function<Customers, String> getter)
+    {
+       return getter.apply(customer);
     }
 
     public static HashMap<String, ArrayList<Customers>>  listShortCut(String listname){
@@ -90,14 +89,17 @@ public class Service {
         ArrayList<Customers>sortedbyinput = new ArrayList<>();
         for (String xxx : customerlist.keySet())
         {
-
-            String xxxtostring = String.valueOf(xxx);
-            if (xxxtostring.contains(containedsubstring))
+            try
             {
-                for (int i = 0; i < customerlist.get(xxxtostring).size(); i++)
-                {
-                    sortedbyinput.add(customerlist.get(xxxtostring).get(i));
+                String xxxtostring = String.valueOf(xxx);
+                if (xxxtostring.contains(containedsubstring)) {
+                    for (int i = 0; i < customerlist.get(xxxtostring).size(); i++) {
+                        sortedbyinput.add(customerlist.get(xxxtostring).get(i));
+                    }
                 }
+            } catch( Exception e){
+                System.out.println("none");
+                continue;
             }
         }
         return sortedbyinput;

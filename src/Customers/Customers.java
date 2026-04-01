@@ -85,7 +85,7 @@ public class Customers {
 
         }
 
-    public ArrayList<String> getInfoDynamical(String input, ArrayList<Customers> list) {
+    public ArrayList<String> getInfoDynamical(String input) {
             ArrayList<String> output = new ArrayList<>();
 
 
