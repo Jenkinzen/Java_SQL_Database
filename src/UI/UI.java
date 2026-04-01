@@ -29,7 +29,7 @@ public class UI {
     }
 
     public static void multiAttributePrint(String numberofchosencolumns,ArrayList<Customers> inputlist){
-        for(int i = 0; i <= inputlist.size();i++){
+        for(int i = 0; i < inputlist.size();i++){
 
             System.out.println("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX CUSTOMER #" + ((i)+1) + " XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
@@ -119,11 +119,8 @@ public class UI {
 
             String columnnumbers = scanner.next();
 
+            multiAttributePrint(columnnumbers,list);
 
-            for (int i = 0; i < list.size(); i++)
-            {
-                multiAttributePrint(columnnumbers,list);
-            }
         }
 
     }
@@ -205,7 +202,7 @@ public class UI {
                 System.out.println("----------------------------------------STATE------------------------------------------");
                 ArrayList<Customers> outputstate = Service.Service.applyFunctionOnList("state", searcheverything, Service.Service::valueSearchByContainingSubString);
                 for (int i = 0; i < outputstate.size(); i++) {
-                    System.out.println(Service.Service.getSoughtAttribute(outputstate.get(i), Customers::getAddress)+"           " + "Customer ID:   " + Service.Service.getSoughtAttribute(outputaddress.get(i), Customers::getId));
+                    System.out.println(Service.Service.getSoughtAttribute(outputstate.get(i), Customers::getState)+"           " + "Customer ID:   " + Service.Service.getSoughtAttribute(outputaddress.get(i), Customers::getId));
                 }
 
                 System.out.println("----------------------------------------PHONE------------------------------------------");
@@ -216,19 +213,19 @@ public class UI {
 
                 System.out.println("----------------------------------------FAX------------------------------------------");
                 ArrayList<Customers> outputfax = Service.Service.applyFunctionOnList("fax", searcheverything, Service.Service::valueSearchByContainingSubString);
-                for(int i = 0; i < outputstate.size();i++) {
+                for(int i = 0; i < outputfax.size();i++) {
                     System.out.println(Service.Service.getSoughtAttribute(outputfax.get(i), Customers::getFax)+"           " + "Customer ID:   " + Service.Service.getSoughtAttribute(outputfax.get(i), Customers::getId));
                 }
 
                 System.out.println("----------------------------------------SUPPORT REP ID------------------------------------------");
                 ArrayList<Customers> outputsupportrepid = Service.Service.applyFunctionOnList("supportrepid", searcheverything, Service.Service::valueSearchByContainingSubString);
-                for(int i = 0; i < outputstate.size();i++) {
+                for(int i = 0; i < outputsupportrepid.size();i++) {
                     System.out.println(Service.Service.getSoughtAttribute(outputsupportrepid.get(i), Customers::getSupportrepid)+"           " + "Customer ID:   " + Service.Service.getSoughtAttribute(outputsupportrepid.get(i), Customers::getId));
                 }
 
                 System.out.println("----------------------------------------BILL------------------------------------------");
                 ArrayList<Customers> outputbill = Service.Service.applyFunctionOnList("bill", searcheverything, Service.Service::valueSearchByContainingSubString);
-                for(int i = 0; i < outputstate.size();i++) {
+                for(int i = 0; i < outputbill.size();i++) {
                     System.out.println(Service.Service.getSoughtAttribute(outputbill.get(i), Customers::BillAsString)+"           " + "Customer ID:   " + Service.Service.getSoughtAttribute(outputbill.get(i), Customers::getId));
                 }
            }

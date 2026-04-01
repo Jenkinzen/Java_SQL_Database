@@ -92,7 +92,7 @@ public class Service {
             try
             {
                 String xxxtostring = String.valueOf(xxx);
-                if (xxxtostring.contains(containedsubstring)) {
+                if (xxxtostring.toLowerCase().contains(containedsubstring)) {
                     for (int i = 0; i < customerlist.get(xxxtostring).size(); i++) {
                         sortedbyinput.add(customerlist.get(xxxtostring).get(i));
                     }
