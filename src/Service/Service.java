@@ -3,6 +3,7 @@ package Service;
 import Customers.Customers;
 import Storage.Storage;
 
+import javax.management.AttributeList;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.BiFunction;
@@ -11,8 +12,7 @@ import java.util.function.Function;
 public class Service {
 
 
-    //Erstellen einer HashMap und Rechnung einfügen insofern es für die customerid noch keine gibt
-    // else -> wenn es eine gibt die Values in die ArrayList der HashMap einfügen
+
 
     //SQL-DATACONVERTING FUNCTIONS//////////////////////////////////////////////////////////////////////////////////////
     public static HashMap<String, ArrayList<Customers>> createKeyAndFillValuesMultiValue(String keyvalue, HashMap<String, ArrayList<Customers>> hashmap, Customers customerinfo) {
@@ -52,9 +52,7 @@ public class Service {
 
 
     //SORT-AND-FIND-FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////
-    //Erzeuge neuen Key für Anfangsbuchstabe des Attributes wenns keinen gibt, sonst pack jede Value mit gleichem Anfangsbuchstaben an den Key.
-    // weiß nich obs überhaupt smart is den kram in ner funktion zu haben weil sortieren nach anfangsbuchstabe klingt jetz nich so krass nach
-    // reusability... naja ma gucken.
+
     public static HashMap<String, ArrayList<Customers>> sortedByStartingLetters(String startingletterword, HashMap<String, ArrayList<Customers>> outputlist, Customers customerinfo) {
             String startingletter = (startingletterword.substring(0, 1));
             if (!outputlist.containsKey(startingletter)) {
@@ -88,10 +86,10 @@ public class Service {
     public static ArrayList<Customers> valueSearchByContainingSubString(HashMap<String, ArrayList<Customers>> customerlist,String containedsubstring) {
         ArrayList<Customers>sortedbyinput = new ArrayList<>();
         for (String xxx : customerlist.keySet())
-        {
+         {
             try
             {
-                String xxxtostring = String.valueOf(xxx);
+                String xxxtostring = String.valueOf(xxx); // macht null als Datentyp zu "null" als String
                 if (xxxtostring.toLowerCase().contains(containedsubstring)) {
                     for (int i = 0; i < customerlist.get(xxxtostring).size(); i++) {
                         sortedbyinput.add(customerlist.get(xxxtostring).get(i));

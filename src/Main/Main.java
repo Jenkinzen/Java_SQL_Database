@@ -12,9 +12,7 @@ public class Main {
         DataAccess.getcustomerdata();
 
 
-
         UI.UI.mainMenu();
-
     }
 
 

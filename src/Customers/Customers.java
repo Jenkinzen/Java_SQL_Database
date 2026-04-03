@@ -55,97 +55,67 @@ public class Customers {
 
 
 
-         public String getInfoShort(){
-            return "\n\nID: " + id +
-                   "\nFirst Name: " + firstname +
-                   "\nLast Name: " + lastname +
-                    "\nAddress: " + address +
-                   "\nCity: " + city +
-                   "\nCountry: " + country+
-                    "\nBill: " + bill+ "$\n";
 
 
-        }
-
-        public String getInfoAll(){
-            return "\n\nID: " + id +
-                    "\nFirst Name: " + firstname +
-                    "\nLast Name: " + lastname +
-                    "\nCompany: " + company +
-                    "\nAddress: " + address +
-                    "\nCity: " + city +
-                    "\nState: " + state +
-                    "\nCountry: " + country +
-                    "\nPostal Code: " + postalcode +
-                    "\nPhone: " + phone +
-                    "\nFax: " + fax +
-                    "\nEmail: " + email +
-                    "\nSupport Rep ID: " + supportrepid +
-                    "\nBill: " + bill + "$\n";
-
-        }
-
-    public ArrayList<String> getInfoDynamical(String input) {
+    public ArrayList<String> getInfoDynamical(int input) {
             ArrayList<String> output = new ArrayList<>();
 
 
-                if (input.contains("1")) {
+                if (input == 1) {
                     output.add(getId());
                 }
 
-                if (input.contains("2")) {
+                if (input == 2) {
                     output.add(getFirstName());
                 }
 
-                if (input.contains("3")) {
+                if (input == 3) {
                     output.add(getLastName());
                 }
 
-                if (input.contains("4")) {
+                if (input == 4) {
                     output.add(getAddress());
                 }
 
-                if (input.contains("5")) {
+                if (input == 5) {
                     output.add(getCity());
                 }
 
-                if (input.contains("6")) {
+                if (input == 6) {
                     output.add(String.valueOf(getState()));
                 }
 
-                if (input.contains("7")) {
+                if (input == 7) {
                     output.add(getCountry());
                 }
 
-                if (input.contains("8")) {
+                if (input == 8) {
                     output.add(getPostalcode());
                 }
 
-                if (input.contains("9")) {
+                if (input == 9) {
                     output.add(getPhone());
                 }
 
-                if (input.contains("10")) {
+                if (input == 10) {
                     output.add(getFax());
                 }
 
-                if (input.contains("11")) {
+                if (input == 11) {
                     output.add(getEmail());
                 }
 
-                if (input.contains("12")) {
+                if (input == 12) {
                     output.add(getSupportrepid());
                 }
 
-                if (input.contains("13")) {
+                if (input == 13) {
                     output.add(BillAsString());
                 }
 
 
         return output;
     }
-
-
 
         public String getId(){
             return id;
@@ -199,11 +169,7 @@ public class Customers {
             return supportrepid;
         }
 
-        public double getBill() {
-
-            return Math.round(bill*100) / 100;
-
-        }
+        public double getBill() { return bill;}
 
         public String BillAsString(){
             String stringbill = String.valueOf(getBill());
