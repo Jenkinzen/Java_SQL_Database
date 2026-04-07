@@ -75,6 +75,7 @@ public class DataAccess
             Service.Service.createKeyAndFillValuesMultiValue(company, Storage.Storage.customers_sorted_by_company, c);
             Service.Service.createKeyAndFillValuesMultiValue(postalcode, Storage.Storage.customers_sorted_by_postalcode, c);
             Service.Service.createKeyAndFillValuesMultiValue(supportrepid, Storage.Storage.customers_sorted_by_supportrepid, c);
+            Service.Service.createKeyAndFillValuesMultiValue(bill.toString(), Storage.Storage.customers_sorted_by_bill, c);
 
             //Eine Value wird einem Key zugewiesen
             Service.Service.createKeyAndFillValuesSingleValue(lastname, Storage.Storage.customers_sorted_by_lastname, c);
@@ -85,8 +86,6 @@ public class DataAccess
 
             //Übergeordnete HashMap (quasi Hauptmenü um sachen bezüglich Customer zu finden)
             Storage.Storage.customersortedbycategories.put("customerid", Storage.Storage.customers_sorted_by_id);
-            Storage.Storage.customersortedbycategories.put("first_name_letter", Storage.Storage.customers_sorted_by_firstname_letter);
-            Storage.Storage.customersortedbycategories.put("last_name_letter", Storage.Storage.customers_sorted_by_lastname_letter);
             Storage.Storage.customersortedbycategories.put("first_name", Storage.Storage.customers_sorted_by_firstname);
             Storage.Storage.customersortedbycategories.put("last_name", Storage.Storage.customers_sorted_by_lastname);
             Storage.Storage.customersortedbycategories.put("company", Storage.Storage.customers_sorted_by_company);
@@ -99,6 +98,7 @@ public class DataAccess
             Storage.Storage.customersortedbycategories.put("fax", Storage.Storage.customers_sorted_by_fax);
             Storage.Storage.customersortedbycategories.put("supportrepid", Storage.Storage.customers_sorted_by_supportrepid);
             Storage.Storage.customersortedbycategories.put("bill", Storage.Storage.customers_sorted_by_bill);
+            Storage.Storage.customersortedbycategories.put("email", Storage.Storage.customers_sorted_by_email);
 
 
         }

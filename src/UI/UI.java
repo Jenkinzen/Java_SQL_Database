@@ -15,23 +15,31 @@ public class UI {
 
     /// DATAS///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public static Map<String,Function<Customers,String>> AttributeNameAndGetterFunktionMap = new LinkedHashMap<>(Map.ofEntries(
-            Map.entry("CUSTOMER ID", (Function<Customers, String>) (c -> c.getId())),     // Lambda Funktionen, klappt anders nich
-            Map.entry("FIRST NAME",(Function<Customers, String>) (c -> c.getFirstName())),
-            Map.entry("LAST NAME",(Function<Customers, String>) (c -> c.getLastName())),
-             Map.entry("ADDRESS",(Function<Customers, String>) (c -> c.getAddress())),
-             Map.entry("CITY",(Function<Customers, String>) (c -> c.getCity())),
-             Map.entry("COUNTRY",(Function<Customers, String>) (c -> c.getCountry())),
-             Map.entry("COMPANY",(Function<Customers, String>) (c -> c.getCompany())),
-             Map.entry("STATE",(Function<Customers, String>) (c -> c.getState())),
-             Map.entry("PHONE",(Function<Customers, String>) (c -> c.getPhone())),
-             Map.entry("POSTAL CODE",(Function<Customers, String>) (c -> c.getPostalcode())),
-             Map.entry("FAX",(Function<Customers, String>) (c -> c.getFax())),
-             Map.entry("EMAIL",(Function<Customers, String>) (c -> c.getEmail())),
-             Map.entry("SUPPORT REP ID", (Function<Customers, String>) (c -> c.getSupportrepid())),
-             Map.entry("FINAL BILL",(Function<Customers, String>) (c ->c.BillAsString()))));
 
-    public static ArrayList<Map.Entry<String,Function<Customers,String>>> attributenameandgetterfunctionmap = new ArrayList<>(AttributeNameAndGetterFunktionMap.entrySet());
+
+    private static Map<String, Function<Customers, String>> AttributeNameAndGetterFunktionMap() {
+        Map<String, Function<Customers, String>> map = new LinkedHashMap<>();
+
+        map.put("CUSTOMER ID", Customers::getId);
+        map.put("FIRST NAME", Customers::getFirstName);
+        map.put("LAST NAME", Customers::getLastName);
+        map.put("ADDRESS", Customers::getAddress);
+        map.put("CITY", Customers::getCity);
+        map.put("COUNTRY", Customers::getCountry);
+        map.put("COMPANY", Customers::getCompany);
+        map.put("STATE", Customers::getState);
+        map.put("PHONE", Customers::getPhone);
+        map.put("POSTAL CODE", Customers::getPostalcode);
+        map.put("FAX", Customers::getFax);
+        map.put("EMAIL", Customers::getEmail);
+        map.put("SUPPORT REP ID", Customers::getSupportrepid);
+        map.put("FINAL BILL", Customers::BillAsString);
+
+        return map;
+    }
+    public static ArrayList<String> ListNameList = new ArrayList<>(Arrays.asList
+    ("customerid","first_name","last_name","address","city","country","company","state","phone","postalcode","fax","email","supportrepid","bill"));
+
 
 
 
@@ -198,17 +206,47 @@ public class UI {
 
     // FUNKTIONIERT ABER ICH NICHT RICHTIG / GIBT ALLE ATTRIBUTE DES CUSTOMERS AUS WO DER SUCHBEGRIFF IM VORNAMEN AUFTAUCHT(GLAUB ICH) ABER SUCHT NICHT IN ALLEN ATTRIBUTEN
     // NACH DEM SCHLAGWORT, liegt wahrscheinlich daran das variablen in der for-schleife zugeordnet werden statt davor, naja , arbeit für morgen oder so.
-    public static void wholeCustomerFormatAndPrint(String scannerinput,String listname){
-        for (int i = 0; i < attributenameandgetterfunctionmap.size();i++) {
-            Map.Entry<String, Function<Customers, String>> actualKeyValuePair = attributenameandgetterfunctionmap.get(i);
-            String actualkeyofpair = actualKeyValuePair.getKey();
-            Function<Customers,String> actualvalueofpair = actualKeyValuePair.getValue();
-            System.out.println("----------------------------------------" + actualkeyofpair + "------------------------------------------");
-            ArrayList<Customers> outputlist= Service.Service.applyFunctionOnList(listname, scannerinput, Service.Service::valueSearchByContainingSubString);
-            for (int i2 = 0; i2 < outputlist.size(); i2++) {
-                System.out.printf("%-50s%5s%5s%n", Service.Service.getSoughtAttribute(outputlist.get(i2), actualvalueofpair), "Customer ID:", Service.Service.getSoughtAttribute(outputlist.get(i2), Customers::getId));
+    public static void wholeCustomerFormatAndPrint(String scannerinput)
+    {
+        ArrayList <String> currentkeyofpairlist = new ArrayList<>();
+        ArrayList<Function<Customers,String>> currentvalueofpairlist = new ArrayList<>() ;
+        Set<Map.Entry<String, Function<Customers, String>>> allEntrySets = AttributeNameAndGetterFunktionMap().entrySet(); // Set -> nennt sich "View" es ist kein Datentyp sondern eine "Art auf die Map zu schauen".
+        for(Map.Entry<String, Function<Customers, String>> keyloopvar : allEntrySets) {
+                currentkeyofpairlist.add(keyloopvar.getKey());
+                currentvalueofpairlist.add(keyloopvar.getValue());
+            }
+        for(int i = 0; i < ListNameList.size();i++)
+        { // geht nacheinander alle listen durch -> customerid[0],firstname[1],lastname[2] etc.
+            ArrayList<Customers> currentlist = Service.Service.applyFunctionOnList(ListNameList.get(i), scannerinput, Service.Service::valueSearchByContainingSubString);
+
+            System.out.println("----------------------------------------" + currentkeyofpairlist.get(i) + "------------------------------------------");
+            for(int i2 = 0; i2 < currentlist.size();i2++) {
+                System.out.printf("%-50s%5s%5s%n", Service.Service.getSoughtAttribute(currentlist.get(i2), currentvalueofpairlist.get(i)), "Customer ID:", Service.Service.getSoughtAttribute(currentlist.get(i2), Customers::getId));
             }
         }
+
+
+
+
+//            for (int i = 0; i < AttributeNameAndGetterFunktionMap.size();i++) {
+//                System.out.println("----------------------------------------" + currentkeyofpairlist.get(i) + "------------------------------------------");
+//                ArrayList<Customers> outputlist= Service.Service.applyFunctionOnList(listname, scannerinput, Service.Service::valueSearchByContainingSubString);
+//                System.out.println(outputlist.listIterator());
+//                for (int i3 = 0; i3 < outputlist.size(); i3++) {
+//                    System.out.printf("%-50s%5s%5s%n", Service.Service.getSoughtAttribute(outputlist.get(i3), currentvalueofpairlist.get(i3)), "Customer ID:", Service.Service.getSoughtAttribute(outputlist.get(i3), Customers::getId));
+//    }
+
+//        for (int i = 0; i < attributenameandgetterfunctionmap.size();i++)
+//        {
+//            Map.Entry<String, Function<Customers, String>> currentKeyValuePair = attributenameandgetterfunctionmap.get(i);
+//            String currentkeyofpair = currentKeyValuePair.getKey();
+//            Function<Customers,String> currentvalueofpair = currentKeyValuePair.getValue();
+//            System.out.println("----------------------------------------" + currentkeyofpair + "------------------------------------------");
+//            ArrayList<Customers> outputlist= Service.Service.applyFunctionOnList(listname, scannerinput, Service.Service::valueSearchByContainingSubString);
+//            for (int i2 = 0; i2 < outputlist.size(); i2++) {
+//                System.out.printf("%-50s%5s%5s%n", Service.Service.getSoughtAttribute(outputlist.get(i2), currentvalueofpair), "Customer ID:", Service.Service.getSoughtAttribute(outputlist.get(i2), Customers::getId));
+//            }
+//        }
     }
 
     public static void customerMenu() {
@@ -233,8 +271,7 @@ public class UI {
                     System.out.printf("%-50s%5s%5s%n",Service.Service.getSoughtAttribute(outputfirstname.get(i), Customers::getFirstName),"Customer ID:" , Service.Service.getSoughtAttribute(outputfirstname.get(i), Customers::getId));
                 }                   //%-15s = 15 stellen von links(-) platz für name / 25s = nimmt 25 zeichen platz für customerID AB DEM PUNKT WO DIE 15 stellen des ersten Arguments aufhören(bzw genau ab stelle 15) /
                 System.out.println("----------------------------------------TESTOFTHEFUNCTION------------------------------------------");
-                wholeCustomerFormatAndPrint(searcheverything,"first_name");
-
+                wholeCustomerFormatAndPrint(searcheverything);
                 System.out.println("----------------------------------------ENDOFTHETESTOFFUNK------------------------------------------");
 
                 System.out.println("----------------------------------------LAST NAME------------------------------------------");
