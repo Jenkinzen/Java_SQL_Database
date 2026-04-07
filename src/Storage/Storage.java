@@ -31,4 +31,5 @@ public class Storage {
     public static HashMap<String, ArrayList<Customers>> customers_sorted_by_email = new HashMap<>();
     public static HashMap<String, ArrayList<Customers>> customers_sorted_by_supportrepid = new HashMap<>();
     public static HashMap<String, ArrayList<Customers>> customers_sorted_by_bill = new HashMap<>();
+    public static ArrayList<Customers> all_customers = new ArrayList<>();
 }

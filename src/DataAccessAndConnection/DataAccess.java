@@ -1,6 +1,7 @@
 package DataAccessAndConnection;
 
 import Customers.Customers;
+import Storage.Storage;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -30,7 +31,7 @@ public class DataAccess
 
             //Erstellen einer HashMap und Rechnung einfügen insofern es für die customerid noch keine gibt
 
-            Service.Service.getAndRoundFinalSum(Storage.Storage.customer_bill_by_id, customerid, bill);
+            Service.Service.getAndRoundFinalSum(Storage.customer_bill_by_id, customerid, bill);
 
 
         }
@@ -56,49 +57,49 @@ public class DataAccess
             String email = customerinfos.getString("Email");
             String supportrepid = customerinfos.getString("SupportRepId");
             //clabel customerid weil .get die Value zum angegebenen Key sucht
-            Double bill = Storage.Storage.customer_bill_by_id.get(customerinfos.getString("CustomerId"));
+            Double bill = Storage.customer_bill_by_id.get(customerinfos.getString("CustomerId"));
 
 
             Customers c = new Customers(customerid, firstname, lastname, address, city, country, company, state, phone, postalcode, fax, email, supportrepid, bill);
 
 
             //Customer(Value) werden nach Anfangsbuchstabe des Nachnamens(Key) in customer_sorted_by_lastname_letter gepackt
-            Service.Service.sortedByStartingLetters(firstname, Storage.Storage.customers_sorted_by_firstname_letter, c);
-            Service.Service.sortedByStartingLetters(lastname, Storage.Storage.customers_sorted_by_lastname_letter, c);
-
+            Service.Service.sortedByStartingLetters(firstname, Storage.customers_sorted_by_firstname_letter, c);
+            Service.Service.sortedByStartingLetters(lastname, Storage.customers_sorted_by_lastname_letter, c);
+            Storage.all_customers.add(c);
 
             //Mehrere Values werden einem Key zugewiesen
-            Service.Service.createKeyAndFillValuesMultiValue(address, Storage.Storage.customers_sorted_by_address, c);
-            Service.Service.createKeyAndFillValuesMultiValue(city, Storage.Storage.customers_sorted_by_city, c);
-            Service.Service.createKeyAndFillValuesMultiValue(country, Storage.Storage.customers_sorted_by_country, c);
-            Service.Service.createKeyAndFillValuesMultiValue(state, Storage.Storage.customers_sorted_by_state, c);
-            Service.Service.createKeyAndFillValuesMultiValue(company, Storage.Storage.customers_sorted_by_company, c);
-            Service.Service.createKeyAndFillValuesMultiValue(postalcode, Storage.Storage.customers_sorted_by_postalcode, c);
-            Service.Service.createKeyAndFillValuesMultiValue(supportrepid, Storage.Storage.customers_sorted_by_supportrepid, c);
-            Service.Service.createKeyAndFillValuesMultiValue(bill.toString(), Storage.Storage.customers_sorted_by_bill, c);
+            Service.Service.createKeyAndFillValuesMultiValue(address, Storage.customers_sorted_by_address, c);
+            Service.Service.createKeyAndFillValuesMultiValue(city, Storage.customers_sorted_by_city, c);
+            Service.Service.createKeyAndFillValuesMultiValue(country, Storage.customers_sorted_by_country, c);
+            Service.Service.createKeyAndFillValuesMultiValue(state, Storage.customers_sorted_by_state, c);
+            Service.Service.createKeyAndFillValuesMultiValue(company, Storage.customers_sorted_by_company, c);
+            Service.Service.createKeyAndFillValuesMultiValue(postalcode, Storage.customers_sorted_by_postalcode, c);
+            Service.Service.createKeyAndFillValuesMultiValue(supportrepid, Storage.customers_sorted_by_supportrepid, c);
+            Service.Service.createKeyAndFillValuesMultiValue(bill.toString(), Storage.customers_sorted_by_bill, c);
 
             //Eine Value wird einem Key zugewiesen
-            Service.Service.createKeyAndFillValuesSingleValue(lastname, Storage.Storage.customers_sorted_by_lastname, c);
-            Service.Service.createKeyAndFillValuesSingleValue(firstname, Storage.Storage.customers_sorted_by_firstname, c);
-            Service.Service.createKeyAndFillValuesSingleValue(customerid, Storage.Storage.customers_sorted_by_id, c);
-            Service.Service.createKeyAndFillValuesSingleValue(email, Storage.Storage.customers_sorted_by_email, c);
+            Service.Service.createKeyAndFillValuesSingleValue(lastname, Storage.customers_sorted_by_lastname, c);
+            Service.Service.createKeyAndFillValuesSingleValue(firstname, Storage.customers_sorted_by_firstname, c);
+            Service.Service.createKeyAndFillValuesSingleValue(customerid, Storage.customers_sorted_by_id, c);
+            Service.Service.createKeyAndFillValuesSingleValue(email, Storage.customers_sorted_by_email, c);
 
 
             //Übergeordnete HashMap (quasi Hauptmenü um sachen bezüglich Customer zu finden)
-            Storage.Storage.customersortedbycategories.put("customerid", Storage.Storage.customers_sorted_by_id);
-            Storage.Storage.customersortedbycategories.put("first_name", Storage.Storage.customers_sorted_by_firstname);
-            Storage.Storage.customersortedbycategories.put("last_name", Storage.Storage.customers_sorted_by_lastname);
-            Storage.Storage.customersortedbycategories.put("company", Storage.Storage.customers_sorted_by_company);
-            Storage.Storage.customersortedbycategories.put("address", Storage.Storage.customers_sorted_by_address);
-            Storage.Storage.customersortedbycategories.put("postalcode", Storage.Storage.customers_sorted_by_postalcode);
-            Storage.Storage.customersortedbycategories.put("city", Storage.Storage.customers_sorted_by_city);
-            Storage.Storage.customersortedbycategories.put("country", Storage.Storage.customers_sorted_by_country);
-            Storage.Storage.customersortedbycategories.put("state", Storage.Storage.customers_sorted_by_state);
-            Storage.Storage.customersortedbycategories.put("phone", Storage.Storage.customers_sorted_by_phone);
-            Storage.Storage.customersortedbycategories.put("fax", Storage.Storage.customers_sorted_by_fax);
-            Storage.Storage.customersortedbycategories.put("supportrepid", Storage.Storage.customers_sorted_by_supportrepid);
-            Storage.Storage.customersortedbycategories.put("bill", Storage.Storage.customers_sorted_by_bill);
-            Storage.Storage.customersortedbycategories.put("email", Storage.Storage.customers_sorted_by_email);
+            Storage.customersortedbycategories.put("customerid", Storage.customers_sorted_by_id);
+            Storage.customersortedbycategories.put("first_name", Storage.customers_sorted_by_firstname);
+            Storage.customersortedbycategories.put("last_name", Storage.customers_sorted_by_lastname);
+            Storage.customersortedbycategories.put("company", Storage.customers_sorted_by_company);
+            Storage.customersortedbycategories.put("address", Storage.customers_sorted_by_address);
+            Storage.customersortedbycategories.put("postalcode", Storage.customers_sorted_by_postalcode);
+            Storage.customersortedbycategories.put("city", Storage.customers_sorted_by_city);
+            Storage.customersortedbycategories.put("country", Storage.customers_sorted_by_country);
+            Storage.customersortedbycategories.put("state", Storage.customers_sorted_by_state);
+            Storage.customersortedbycategories.put("phone", Storage.customers_sorted_by_phone);
+            Storage.customersortedbycategories.put("fax", Storage.customers_sorted_by_fax);
+            Storage.customersortedbycategories.put("supportrepid", Storage.customers_sorted_by_supportrepid);
+            Storage.customersortedbycategories.put("bill", Storage.customers_sorted_by_bill);
+            Storage.customersortedbycategories.put("email", Storage.customers_sorted_by_email);
 
 
         }
