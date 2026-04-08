@@ -107,21 +107,6 @@ public class UI {
         }
     }
 
-    public static ArrayList<Customers> outputOfCustomerWithSameStartingCharacters(HashMap<String, ArrayList<Customers>> HashMap,String lastnameletter)
-    {
-        for(int i = 0; i < HashMap.get(lastnameletter).toArray().length;i++) {
-            ArrayList<Customers> HashMapbyletters = HashMap.get(lastnameletter);
-            HashMapbyletters.get(i);
-            System.out.println("CUSTOMER ID:" + HashMap.get(i).get(i).getInfoDynamical(1));
-            System.out.println("FULL NAME: "+HashMap.get(i).get(i).getInfoDynamical(2)+HashMap.get(i).get(i).getInfoDynamical(3));
-            System.out.println("ADDRESS: "+HashMap.get(i).get(i).getInfoDynamical(4));
-            System.out.println("CITY: "+HashMap.get(i).get(i).getInfoDynamical(5));
-            System.out.println("STATE: "+HashMap.get(i).get(i).getInfoDynamical(6));
-            System.out.println("COUNTRY: "+HashMap.get(i).get(i).getInfoDynamical(7));
-        }
-        return null;
-    }
-
     public static void wholeCustomerFormatAndPrint(String scannerinput)
     {
         ArrayList <String> currentkeyofpairlist = new ArrayList<>();
@@ -149,7 +134,7 @@ public class UI {
         System.out.println("\"Please insert what you want to search for: ");
         String theinput = scanner.next();
         //SUCHT NICHT IN DEN KEYS SONDERN VALUES , ALSO SUCHT QUASI IN ALLEN COLUMNS.
-        infoOutPutMenu(Service.applyFunctionOnList(ListNameList.get(columnnumber+1), theinput, Service::valueSearchByContainingSubString));
+        infoOutPutMenu(Service.applyFunctionOnList(ListNameList.get(columnnumber-1), theinput, Service::valueSearchByContainingSubString));
     }
 
     /// MENUFUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////
