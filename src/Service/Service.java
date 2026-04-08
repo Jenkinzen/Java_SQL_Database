@@ -10,6 +10,37 @@ import java.util.function.Function;
 
 public class Service {
 
+     //all_customer functions///////////////////////////////////////////////////////////////////////////////////////////
+
+//    System.out.println("Where do you want to search? (dann 1-14 auflistung aller attribute"
+//                       "in der Line dann scanner für Int -> soughtAttribute"
+//                       "What do you want to search?
+//                       "in der Line dann scanner für String -> input")
+    public static ArrayList<Customers> searchInColumnDynamical(ArrayList<Customers> customerlist,int soughtAttribute,String input){
+        ArrayList<Customers> outputlist = new ArrayList<>();
+        for(int i = 0; i < customerlist.size();i++){
+            for(int i2 = 0; i2 < Storage.all_customers.get(i).getInfoDynamical(soughtAttribute).size();i2++) {
+                if (Storage.all_customers.get(i).getInfoDynamical(soughtAttribute).get(i2).toLowerCase().contains(input.toLowerCase())) { // if ID of customer contains input
+                    outputlist.add(Storage.all_customers.get(i));                           // put it in outputlist
+                }
+            }
+        }
+        return outputlist;
+    }
+   //all_customers.get(0) [Customers 0] .getInfoDynamical(2 = first name) ->ArrayList<String> mit treffern
+
+    //  System.out.println(Storage.all_customers.get(1).getInfoDynamical(3).get(0));
+
+        //get(1) (zweiter Customer (1=0)
+        //                                  3 Eintrag(getInfoDynamical arbeitet nicht mit index deshalb 3=3)
+        //get(0) -> erster eintrag(da jedes attribut nur 1 eintrag hat isses an der stelle immer get(0).
+
+
+
+
+
+
+
 
     //SQL-DATACONVERTING FUNCTIONS//////////////////////////////////////////////////////////////////////////////////////
     public static HashMap<String, ArrayList<Customers>> createKeyAndFillValuesMultiValue(String keyvalue, HashMap<String, ArrayList<Customers>> hashmap, Customers customerinfo) {
@@ -92,7 +123,6 @@ public class Service {
                 }
             } catch( Exception e){
                 System.out.println("none");
-                continue;
             }
         }
         return sortedbyinput;
