@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.function.Function;
 
 public class Storage {
-    public static HashMap<String, Double> customer_bill_by_id = new HashMap<>();
+    public static HashMap<String, ArrayList<Double>> customer_bill_by_id = new HashMap<>();
 
     // übergeordnete HashMap um Kategorien auszuwählen
     public static HashMap<String, HashMap<String, ArrayList<Customers>>> customersortedbycategories = new HashMap<>();

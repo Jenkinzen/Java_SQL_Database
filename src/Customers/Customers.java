@@ -17,7 +17,7 @@ public class Customers {
         String fax;
         String email;
         String supportrepid;
-         Double bill;
+        ArrayList<Double> bills;
 
 
         public Customers(String id,
@@ -33,7 +33,7 @@ public class Customers {
                          String fax,
                          String email,
                          String supportrepid,
-                         Double bill
+                         ArrayList<Double> bills
         ) {
             this.id = id;
             this.firstname = firstname;
@@ -48,7 +48,7 @@ public class Customers {
             this.fax = fax;
             this.email = email;
             this.supportrepid = supportrepid;
-            this.bill = bill;
+            this.bills = bills;
 
 
         }
@@ -169,10 +169,10 @@ public class Customers {
             return supportrepid;
         }
 
-        public double getBill() { return bill;}
+        public ArrayList<Double> getBills() { return bills;}
 
         public String BillAsString(){
-            String stringbill = String.valueOf(getBill());
+            String stringbill = String.valueOf(getBills());
             return stringbill;
         }
 
