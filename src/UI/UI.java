@@ -98,7 +98,7 @@ public class UI {
 
         if (columnnumbers.contains(1)) {
 
-            System.out.println(" XXXX XXXX CUSTOMER ID XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX CUSTOMER ID XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.println("Customer ID: " + Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
 
@@ -107,7 +107,7 @@ public class UI {
 
 
         if (columnnumbers.contains(2)) {
-            System.out.println(" XXXX XXXX FIRST NAME XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX FIRST NAME XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getFirstName), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
@@ -115,7 +115,7 @@ public class UI {
 
 
         if (columnnumbers.contains(3)) {
-            System.out.println(" XXXX XXXX LAST NAME XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX LAST NAME XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getLastName), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
@@ -123,63 +123,63 @@ public class UI {
 
 
         if (columnnumbers.contains(4)) {
-            System.out.println(" XXXX XXXX ADDRESS XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX ADDRESS XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getAddress), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
         }
 
         if (columnnumbers.contains(5)) {
-            System.out.println(" XXXX XXXX CITY XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX CITY XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getCity), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
         }
 
         if (columnnumbers.contains(6)) {
-            System.out.println(" XXXX XXXX STATE XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX STATE XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getState), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
         }
 
         if (columnnumbers.contains(7)) {
-            System.out.println(" XXXX XXXX COUNTRY XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX COUNTRY XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getCountry), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
         }
 
         if (columnnumbers.contains(8)) {
-            System.out.println(" XXXX XXXX POSTAL CODE XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX POSTAL CODE XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getPostalcode), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
         }
 
         if (columnnumbers.contains(9)) {
-            System.out.println(" XXXX XXXX PHONE XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX PHONE XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getPhone), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
         }
 
         if (columnnumbers.contains(10)) {
-            System.out.println(" XXXX XXXX FAX XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX FAX XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getFax), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
         }
 
         if (columnnumbers.contains(11)) {
-            System.out.println(" XXXX XXXX EMAIL XXXX XXXX");
+            System.out.printf("%8s%s%n",""," XXXX XXXX EMAIL XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getEmail), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
         }
 
         if (columnnumbers.contains(12)) {
-            System.out.println(" XXXX XXXX SUPPORT REP ID XXXX XXXX");
+            System.out.printf("%8s%s%n","","XXXX XXXX SUPPORT REP ID XXXX XXXX");
             for (int i = 0; i < inputlist.size(); i++) {
                 System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::getSupportrepid), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
             }
@@ -187,12 +187,12 @@ public class UI {
 
         // FUNKTIONIERT NOCH NICHT WEIL all_customers UNGEFÜLLTE "BILL" ATTRIBUTE HAT ( MUSS ICH NOCH VON DEM ANDEREN TABLE EINFÜGEN) [ ÜBERLEGEN WIE SINGLE BILL / TOTAL BILL DARGESTELLT / ZUGEGRIFFEN WERDEN SOLL ]
         if (columnnumbers.contains(13)) {
-            System.out.println(" XXXX XXXX BILL XXXX XXXX");
+            System.out.printf("%8s%s%n","","XXXX XXXX BILL XXXX XXXX");
                 for (int i = 0; i < inputlist.size(); i++) {
                     System.out.printf("%-40s%5s%s%n", Service.getSoughtAttribute(inputlist.get(i), Customers::BillAsString), "CUSTOMER ID: ", Service.getSoughtAttribute(inputlist.get(i), Customers::getId));
                 }
         }
-        System.out.println("\n");
+
     }
 
     /// MENUFUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -33,7 +33,7 @@ public class Service {
 
         //get(1) (zweiter Customer (1=0)
         //                                  3 Eintrag(getInfoDynamical arbeitet nicht mit index deshalb 3=3)
-        //get(0) -> erster eintrag(da jedes attribut nur 1 eintrag hat isses an der stelle immer get(0).
+        //get(0) -> erster eintrag(da jedes attribut nur 1 eintrag hat isses an der stelle immer get(0). (außer bei bills)
 
 
     //SQL-DATACONVERTING FUNCTIONS//////////////////////////////////////////////////////////////////////////////////////
