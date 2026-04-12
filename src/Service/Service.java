@@ -38,28 +38,7 @@ public class Service {
 
     //SQL-DATACONVERTING FUNCTIONS//////////////////////////////////////////////////////////////////////////////////////
 
-    public static HashMap<String, ArrayList<Customers>> createKeyAndFillValuesMultiValue(String keyvalue, HashMap<String, ArrayList<Customers>> hashmap, Customers customerinfo) {
-        if (!hashmap.containsKey(keyvalue)) {
-            hashmap.put(keyvalue, new ArrayList<>());
-            hashmap.get(keyvalue).add(customerinfo);
 
-        } else {
-            if (hashmap.containsKey(keyvalue)) {
-                hashmap.get(keyvalue).add(customerinfo);
-            }
-            return hashmap;
-        }
-
-        return hashmap;
-    }
-
-    public static HashMap<String, ArrayList<Customers>> createKeyAndFillValuesSingleValue(String key, HashMap<String, ArrayList<Customers>> list, Customers customerinfo) {
-        if (!list.containsKey(key)) {
-            list.put(key, new ArrayList<>());
-            list.get(key).add(customerinfo);
-        }
-        return list;
-    }
 
     public static HashMap<String, ArrayList<Double>> getBills(HashMap<String, ArrayList<Double>> customerlist, String idofcustomer, Double billofcustomer) {
         if (!customerlist.containsKey(idofcustomer)) {
@@ -73,13 +52,24 @@ public class Service {
 
     //SORT-AND-FIND-FUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////
 
-    public static HashMap<String, ArrayList<Customers>> sortedByStartingLetters(String startingletterword, HashMap<String, ArrayList<Customers>> outputlist, Customers customerinfo) {
-        String startingletter = (startingletterword.substring(0, 1));
-        if (!outputlist.containsKey(startingletter)) {
-            outputlist.put(startingletter, new ArrayList<>());
-            outputlist.get(startingletter).add(customerinfo);
-        } else {
-            outputlist.get(startingletter).add(customerinfo);
+    // REFACTOREN (ODER NEU CODEN) EINER FUNKTION DIE EINE ARRAYLIST MIT CUSTOMERS AUSGIBT
+    public static ArrayList<Customers> listOfCustomersWithSearchHits (ArrayList<Customers> customerlist,String numbersofchosencolumns,String search){
+
+        ArrayList<Integer> columnnumbers = new ArrayList<>();
+        ArrayList<Customers> outputlist = new ArrayList<>();
+        String[] pieces = numbersofchosencolumns.split(",");
+        for (String piece : pieces) {
+            piece = piece.trim();
+            if (!piece.isEmpty()) {
+                columnnumbers.add(Integer.parseInt(piece));
+            }
+        }
+        for(int i = 0 ; i < customerlist.size();i++){
+            for(int i2 = 0; i2 < columnnumbers.size();i2++) {
+                    if(customerlist.get(i).getInfoDynamical(columnnumbers.get(i2)).contains(search)){
+                        outputlist.add(customerlist.get(i));
+                    }
+            }
         }
         return outputlist;
     }
@@ -101,7 +91,16 @@ public class Service {
 
 
 
-
+//    public static HashMap<String, ArrayList<Customers>> sortedByStartingLetters(String startingletterword, HashMap<String, ArrayList<Customers>> outputlist, Customers customerinfo) {
+//        String startingletter = (startingletterword.substring(0, 1));
+//        if (!outputlist.containsKey(startingletter)) {
+//            outputlist.put(startingletter, new ArrayList<>());
+//            outputlist.get(startingletter).add(customerinfo);
+//        } else {
+//            outputlist.get(startingletter).add(customerinfo);
+//        }
+//        return outputlist;
+//    }
 
     //    public static HashMap<String, ArrayList<Customers>> listShortCut(String listname) {
 //        return Storage.customersortedbycategories.get(listname);
@@ -132,6 +131,28 @@ public class Service {
 //        return sortedbyinput;
 //    }
 
+//    public static HashMap<String, ArrayList<Customers>> createKeyAndFillValuesMultiValue(String keyvalue, HashMap<String, ArrayList<Customers>> hashmap, Customers customerinfo) {
+//        if (!hashmap.containsKey(keyvalue)) {
+//            hashmap.put(keyvalue, new ArrayList<>());
+//            hashmap.get(keyvalue).add(customerinfo);
+//
+//        } else {
+//            if (hashmap.containsKey(keyvalue)) {
+//                hashmap.get(keyvalue).add(customerinfo);
+//            }
+//            return hashmap;
+//        }
+//
+//        return hashmap;
+//    }
+//
+//    public static HashMap<String, ArrayList<Customers>> createKeyAndFillValuesSingleValue(String key, HashMap<String, ArrayList<Customers>> list, Customers customerinfo) {
+//        if (!list.containsKey(key)) {
+//            list.put(key, new ArrayList<>());
+//            list.get(key).add(customerinfo);
+//        }
+//        return list;
+//    }
 
 }
 

@@ -57,59 +57,59 @@ public class Customers {
 
 
 
-    public ArrayList<String> getInfoDynamical(int input) {
+    public ArrayList<String> getInfoDynamical(int input1) {
             ArrayList<String> output = new ArrayList<>();
+                int input2 = (input1+1);
 
-
-                if (input == 1) {
+                if (input2 == 1) {
                     output.add(getId());
                 }
 
-                if (input == 2) {
+                if (input2 == 2) {
                     output.add(getFirstName());
                 }
 
-                if (input == 3) {
+                if (input2 == 3) {
                     output.add(getLastName());
                 }
 
-                if (input == 4) {
+                if (input2 == 4) {
                     output.add(getAddress());
                 }
 
-                if (input == 5) {
+                if (input2 == 5) {
                     output.add(getCity());
                 }
 
-                if (input == 6) {
+                if (input2 == 6) {
                     output.add(String.valueOf(getState()));
                 }
 
-                if (input == 7) {
+                if (input2 == 7) {
                     output.add(getCountry());
                 }
 
-                if (input == 8) {
+                if (input2 == 8) {
                     output.add(getPostalcode());
                 }
 
-                if (input == 9) {
+                if (input2 == 9) {
                     output.add(getPhone());
                 }
 
-                if (input == 10) {
+                if (input2 == 10) {
                     output.add(getFax());
                 }
 
-                if (input == 11) {
+                if (input2 == 11) {
                     output.add(getEmail());
                 }
 
-                if (input == 12) {
+                if (input2 == 12) {
                     output.add(getSupportrepid());
                 }
 
-                if (input == 13) {
+                if (input2 == 13) {
                     output.add(BillAsString());
                 }
 

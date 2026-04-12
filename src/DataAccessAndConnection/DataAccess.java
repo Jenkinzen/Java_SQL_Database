@@ -17,11 +17,6 @@ public class DataAccess
         var stmt = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\ggord\\IdeaProjects\\neues_projekt\\chinook.db").createStatement();
 
 
-
-        //################################################################################################
-        /// LIST SQL PLAYGROUND///////////////////////////////////////////////////////////////////////////
-        //################################################################################################
-
         /// SQL DATASOURCE|PAYMENTINFOS///////////////////////////////////////////////////////////////////
         var paymentinfos = stmt.executeQuery("SELECT BillingAddress,CustomerId,Total FROM invoices");
 
