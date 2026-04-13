@@ -6,16 +6,8 @@ import java.sql.SQLException;
 public class Connection {
 
 
-    public static void connection() throws SQLException {
-        //connection string
-        var url = "jdbc:sqlite:C:\\Users\\ggord\\IdeaProjects\\neues_projekt\\chinook.db";
+    public static java.sql.Connection connection(String url) throws SQLException {
 
-        try (var conn = DriverManager.getConnection(url)) {
-            System.out.println("Connection to SQLite has been established.");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
+        return DriverManager.getConnection(url);
     }
-
 }

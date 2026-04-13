@@ -10,22 +10,28 @@ import java.util.ArrayList;
 public class DataAccess
 {
     public static void getcustomerdata() throws SQLException {
-        Connection.connection();
+        /// DATABASE-VARIABLES////////////////////////////////////////////////////////////////////////////
+
+        String CHINOOK_DB = "jdbc:sqlite:C:\\Users\\ggord\\IdeaProjects\\neues_projekt\\chinook.db";
+        String COMPARE_DB = "jdbc:sqlite:C:\\Users\\ggord\\IdeaProjects\\neues_projekt\\compare.db";
 
 
         /// CONNECTION////////////////////////////////////////////////////////////////////////////////////
-        var stmt = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\ggord\\IdeaProjects\\neues_projekt\\chinook.db").createStatement();
+        var conn_chinook = Connection.connection(CHINOOK_DB);
+        var stmt_chinook = conn_chinook.createStatement();
 
+        var conn_compare = Connection.connection(COMPARE_DB);
+        var stmt_compare = conn_compare.createStatement();
 
         /// SQL DATASOURCE|PAYMENTINFOS///////////////////////////////////////////////////////////////////
-        var paymentinfos = stmt.executeQuery("SELECT BillingAddress,CustomerId,Total FROM invoices");
+        var paymentinfos = stmt_chinook.executeQuery("SELECT BillingAddress,CustomerId,Total FROM invoices");
 
         while (paymentinfos.next()) {
             String customerid = paymentinfos.getString("CustomerId");
             Double bill = paymentinfos.getDouble("Total");
 
 
-            //Erstellen einer HashMap und Rechnung einfügen insofern es für die customerid noch keine gibt
+            //Erstellen einer HashMap und Rechnungen einfügen insofern es für die customerid noch keine gibt
 
             Service.Service.getBills(Storage.customer_bill_by_id, customerid, bill);
 
@@ -33,8 +39,9 @@ public class DataAccess
         }
 
 
-        /// SQL DATASOURCE|CUSTOMERINFOS///////////////////////////////////////////////////////////////////
-        var customerinfos = stmt.executeQuery("SELECT * FROM customers");
+        /// SQL DATASOURCE| CUSTOMERINFOS//////////////////////////////////////////////////////////////////
+        var customerinfos = stmt_chinook.executeQuery("SELECT * FROM customers");
+
 
 
         while (customerinfos.next()) {
@@ -53,14 +60,102 @@ public class DataAccess
             String email = customerinfos.getString("Email");
             String supportrepid = customerinfos.getString("SupportRepId");
             //clabel customerid weil .get die Value zum angegebenen Key sucht
-            ArrayList<Double> bill = Storage.customer_bill_by_id.get(customerinfos.getString("CustomerId"));
+            ArrayList<Double> bill = Storage.customer_bill_by_id.get(customerid);
 
 
             Customers c = new Customers(customerid, firstname, lastname, address, city, country, company, state, phone, postalcode, fax, email, supportrepid, bill);
 
             Storage.all_customers.add(c);
 
-            //Customer(Value) werden nach Anfangsbuchstabe des Nachnamens(Key) in customer_sorted_by_lastname_letter gepackt
+
+        }
+        /// COMPARING SETUP TO FILL IN STATES FOR NULL/////////////////////////////////////////////////////
+        stmt_compare.execute("DROP TABLE IF EXISTS customers_without_state"); // hab den table schon created,deshalb wurde nachträglich column postalcode nicht inserted, deshalb > table löschen , dann wird er neu MIT postalcode angelegt
+        stmt_compare.execute
+                ("CREATE TABLE IF NOT EXISTS customers_without_state(CustomerId TEXT,City TEXT,State TEXT,Country TEXT,PostalCode TEXT)");
+        var insertstmt = conn_compare.prepareStatement("INSERT INTO customers_without_state(CustomerId,City,State,Country,PostalCode) VALUES (?,?,?,?,?)");
+        var customerwithoutstateinfos = stmt_chinook.executeQuery("SELECT CustomerId,City,State,Country,PostalCode FROM customers WHERE state IS NULL");
+        var geonameallcountries = stmt_compare.executeQuery("SELECT field1,field " );;
+
+        stmt_compare.execute("DELETE FROM customers_without_state"); // löscht alte einträge bevor im loop hier drunter wieder neue aufgefüllt werden.
+        while(customerwithoutstateinfos.next()){
+
+            String customerid = customerwithoutstateinfos.getString("CustomerId");
+            String city = customerwithoutstateinfos.getString("City");
+            String state = customerwithoutstateinfos.getString("State");
+            String country = customerwithoutstateinfos.getString("Country");
+            String postalcode = customerwithoutstateinfos.getString("PostalCode");
+
+            insertstmt.setString(1, customerid);
+            insertstmt.setString(2, city);
+            insertstmt.setString(3, state);
+            insertstmt.setString(4, country);
+            insertstmt.setString(5, postalcode);
+            insertstmt.executeUpdate();
+        }
+
+        var check = stmt_compare.executeQuery("SELECT * FROM customers_without_state");
+
+        while (check.next()) {
+            System.out.println(
+                    check.getString("CustomerId") + " | " +
+                            check.getString("City") + " | " +
+                            check.getString("State") + " | " +
+                            check.getString("Country") + " | " +
+                            check.getString("PostalCode")
+            );
+
+        }
+
+
+
+        /// SQL DATASOURCE| ARTISTINFOS////////////////////////////////////////////////////////////////////
+        var artistinfos = stmt_chinook.executeQuery("SELECT * FROM artists");
+
+        while ( artistinfos.next()){
+            String artistid = artistinfos.getString("ArtistId");
+            String artist = artistinfos.getString("Name");
+        }
+
+        var albuminfos = stmt_chinook.executeQuery("SELECT * FROM albums");
+
+        while ( albuminfos.next()){
+            String albumid = albuminfos.getString("AlbumId");
+            String albumtitle = albuminfos.getString("Title");
+            String albumartistid = albuminfos.getString("ArtistId");
+        }
+
+        var trackinfos = stmt_chinook.executeQuery("SELECT * FROM tracks");
+
+        while (trackinfos.next()){
+            String trackid = trackinfos.getString("TrackId");
+            String tracktitle = trackinfos.getString("Name");
+            String trackalbumid = trackinfos.getString("AlbumId");
+            String trackgenreid = trackinfos.getString("GenreId");
+        }
+
+        var genreinfos = stmt_chinook.executeQuery("SELECT * FROM genres");
+
+        while (genreinfos.next()){
+           String genreid = genreinfos.getString("GenreId");
+           String genretitle = genreinfos.getString("Name");
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Customer(Value) werden nach Anfangsbuchstabe des Nachnamens(Key) in customer_sorted_by_lastname_letter gepackt
 //            Service.Service.sortedByStartingLetters(firstname, Storage.customers_sorted_by_firstname_letter, c);
 //            Service.Service.sortedByStartingLetters(lastname, Storage.customers_sorted_by_lastname_letter, c);
 
@@ -96,55 +191,6 @@ public class DataAccess
 //            Storage.customersortedbycategories.put("supportrepid", Storage.customers_sorted_by_supportrepid);
 //            Storage.customersortedbycategories.put("bill", Storage.customers_sorted_by_bill);
 //            Storage.customersortedbycategories.put("email", Storage.customers_sorted_by_email);
-
-
-        }
-
-
-        //#################################################################################################
-        /// DIREKT SQL PLAYGROUND /////////////////////////////////////////////////////////////////////////
-        //#################################################################################################
-
-
-        /// SQL DATASOURCE| ARTISTINFOS////////////////////////////////////////////////////////////////////
-        var artistinfos = stmt.executeQuery("SELECT * FROM artists");
-
-        while ( artistinfos.next()){
-            String artistid = artistinfos.getString("ArtistId");
-            String artist = artistinfos.getString("Name");
-        }
-
-        var albuminfos = stmt.executeQuery("SELECT * FROM albums");
-
-        while ( albuminfos.next()){
-            String albumid = albuminfos.getString("AlbumId");
-            String albumtitle = albuminfos.getString("Title");
-            String albumartistid = albuminfos.getString("ArtistId");
-        }
-
-        var trackinfos = stmt.executeQuery("SELECT * FROM tracks");
-
-        while (trackinfos.next()){
-            String trackid = trackinfos.getString("TrackId");
-            String tracktitle = trackinfos.getString("Name");
-            String trackalbumid = trackinfos.getString("AlbumId");
-            String trackgenreid = trackinfos.getString("GenreId");
-        }
-
-        var genreinfos = stmt.executeQuery("SELECT * FROM genres");
-
-        while (genreinfos.next()){
-           String genreid = genreinfos.getString("GenreId");
-           String genretitle = genreinfos.getString("Name");
-        }
-
-    }
-
-
-
-
-
-
 
 
 }

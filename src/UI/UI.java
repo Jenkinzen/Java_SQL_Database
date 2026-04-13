@@ -60,15 +60,6 @@ public class UI {
         }
     }
 
-    public static void searchOneColumn(int columnnumber){
-
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("\"Please insert what you want to search for: ");
-        String theinput = scanner.next();
-        UI.multiAttributePrintSortedByAttributes("1,2,3,4,5,6,7,8,9,10,11,12,13",Service.searchInColumnDynamical(Storage.all_customers,columnnumber,theinput));
-    }
-
-
     /// MENUFUNCTIONS///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -90,10 +81,6 @@ public class UI {
         }
 
     }
-
-
-
-
 
     public static void customerMenu() {
         while (true) {
@@ -155,6 +142,11 @@ public class UI {
             }
         }
     }
+
+
+
+
+
 
 
 
