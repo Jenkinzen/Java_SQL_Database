@@ -74,8 +74,7 @@ public class DataAccess
         stmt_compare.execute
                 ("CREATE TABLE IF NOT EXISTS customers_without_state(CustomerId TEXT,City TEXT,State TEXT,Country TEXT,PostalCode TEXT)");
         var insertstmt = conn_compare.prepareStatement("INSERT INTO customers_without_state(CustomerId,City,State,Country,PostalCode) VALUES (?,?,?,?,?)");
-        var customerwithoutstateinfos = stmt_chinook.executeQuery("SELECT CustomerId,City,State,Country,PostalCode FROM customers WHERE state IS NULL");
-        var geonameallcountries = stmt_compare.executeQuery("SELECT field1,field " );;
+        var customerwithoutstateinfos = stmt_chinook.executeQuery("SELECT CustomerId,City,State,Country,PostalCode FROM customers ");
 
         stmt_compare.execute("DELETE FROM customers_without_state"); // löscht alte einträge bevor im loop hier drunter wieder neue aufgefüllt werden.
         while(customerwithoutstateinfos.next()){
@@ -93,6 +92,17 @@ public class DataAccess
             insertstmt.setString(5, postalcode);
             insertstmt.executeUpdate();
         }
+        stmt_compare.execute("ALTER TABLE customers_without_state ADD COLUMN CountryShortCut");
+
+        stmt_compare.execute("UPDATE customers_without_state SET CountryShortCut = allCountriesPostalCode.field1 " +
+                                 "FROM allCountriesPostalCode WHERE customers_without_state.City = allCountriesPostalCode.field3 AND customers_without_state.PostalCode = allCountriesPostalCode.field2");
+
+        stmt_compare.execute
+                ("UPDATE customers_without_state SET State = allCountriesPostalCode.field4" +
+                        " FROM allCountriesPostalCode" +
+                        " WHERE customers_without_state.PostalCode = allCountriesPostalCode.field2 AND customers_without_state.City = allCountriesPostalCode.field3");
+
+
 
         var check = stmt_compare.executeQuery("SELECT * FROM customers_without_state");
 
@@ -102,10 +112,13 @@ public class DataAccess
                             check.getString("City") + " | " +
                             check.getString("State") + " | " +
                             check.getString("Country") + " | " +
-                            check.getString("PostalCode")
+                            check.getString("PostalCode") + " | " +
+                            check.getString("CountryShortCut")
             );
 
         }
+
+
 
 
 
